@@ -1,0 +1,45 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      >
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>www.bjmanch.org</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"></link>
+        <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css"></link>
+        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'></link>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+        <style>
+            html, body, h1, h2, h3, h4, h5 {
+                font-family: "Open Sans", sans-serif
+            }
+        </style>
+    </h:head>
+
+    <h:body  styleClass="w3-theme-l5">
+
+        <div id="top">
+            <ui:include src="header.xhtml"></ui:include>
+        </div>
+        <!-- Page Container -->
+        <div class="w3-container w3-content" style="max-width:1400px;margin-top:10px">    
+            <!-- The Grid -->
+            <div class="w3-row">
+                <!-- Left Column -->
+                <ui:include src="left.xhtml"></ui:include>
+                <ui:insert name="content">Content</ui:insert>
+                <ui:include src="right.xhtml"></ui:include>
+
+            </div>
+        </div>
+            <br/>
+        <div id="bottom">
+            <ui:include src="footer.xhtml"></ui:include>
+        </div>
+
+    </h:body>
+
+</html>
