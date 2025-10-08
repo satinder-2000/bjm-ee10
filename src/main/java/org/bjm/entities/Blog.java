@@ -28,7 +28,10 @@ import java.sql.Timestamp;
     @NamedQuery(name = "Blog.findBySummary", query = "SELECT b FROM Blog b WHERE b.summary = :summary"),
     @NamedQuery(name = "Blog.findByText", query = "SELECT b FROM Blog b WHERE b.text = :text"),
     @NamedQuery(name = "Blog.findByPublishedByAccessId", query = "SELECT b FROM Blog b WHERE b.publishedByAccessId = :publishedByAccessId"),
-    @NamedQuery(name = "Blog.findByPublishedByEmail", query = "SELECT b FROM Blog b WHERE b.publishedByEmail = :publishedByEmail")})
+    @NamedQuery(name = "Blog.findByPublishedByEmail", query = "SELECT b FROM Blog b WHERE b.publishedByEmail = :publishedByEmail"),
+    @NamedQuery(name = "Blog.findNBlogs", query = "SELECT b FROM Blog b ORDER BY b.id")
+
+})
 public class Blog implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -3,7 +3,7 @@ package org.bjm.ejbs;
 import jakarta.ejb.Local;
 import java.util.List;
 import org.bjm.entities.SurveyFromForum;
-import org.bjm.entities.SurveyVote;
+import org.bjm.entities.SurveyFromForumVote;
 
 /**
  *
@@ -12,6 +12,6 @@ import org.bjm.entities.SurveyVote;
 @Local
 public interface SurveyFromForumServiceEjbLocal {
     public SurveyFromForum findById(int surveyFromForumId);
-    public SurveyVote postSurveyFromForumVote(SurveyVote surveyVote);
-    public List<SurveyVote> getAllVotesOnSurveyFromForum(int surveyFromForumId);
+    public SurveyFromForumVote postSurveyFromForumVote(SurveyFromForumVote surveyFromForumVote);
+    public List<SurveyFromForumVote> getAllVotesOnSurveyFromForum(int surveyFromForumId);
 }

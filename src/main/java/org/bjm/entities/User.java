@@ -33,8 +33,8 @@ import java.util.Date;
     @NamedQuery(name = "User.findByMobile", query = "SELECT u FROM User u WHERE u.mobile = :mobile"),
     @NamedQuery(name = "User.findByPhone", query = "SELECT u FROM User u WHERE u.phone = :phone"),
     @NamedQuery(name = "User.findByStateName", query = "SELECT u FROM User u WHERE u.stateName = :stateName"),
-    @NamedQuery(name = "User.findByLokSabha", query = "SELECT u FROM User u WHERE u.lokSabha = :lokSabha"),
-    @NamedQuery(name = "User.findByVidhanSabha", query = "SELECT u FROM User u WHERE u.vidhanSabha = :vidhanSabha"),
+    @NamedQuery(name = "User.findByLokSabha", query = "SELECT u FROM User u WHERE u.lokSabhaConstituency = :lokSabhaConstituency"),
+    @NamedQuery(name = "User.findByVidhanSabha", query = "SELECT u FROM User u WHERE u.vidhanSabhaConstituency = :vidhanSabhaConstituency"),
     @NamedQuery(name = "User.findByCreatedOn", query = "SELECT u FROM User u WHERE u.createdOn = :createdOn"),
     @NamedQuery(name = "User.findByUpdatedOn", query = "SELECT u FROM User u WHERE u.updatedOn = :updatedOn")})
 public class User implements Serializable {

@@ -25,12 +25,14 @@ import java.util.Date;
 @NamedQueries({
     @NamedQuery(name = "LokSabhaNominate.findAll", query = "SELECT l FROM LokSabhaNominate l"),
     @NamedQuery(name = "LokSabhaNominate.findById", query = "SELECT l FROM LokSabhaNominate l WHERE l.id = :id"),
-    @NamedQuery(name = "LokSabhaNominate.findByCandidateName", query = "SELECT l FROM LokSabhaNominate l WHERE l.candidateName = :candidateName"),
+    @NamedQuery(name = "LokSabhaNominate.findByCandidateName", query = "SELECT l FROM LokSabhaNominate l WHERE l.stateCode=:stateCode AND l.candidateName = :candidateName"),
     @NamedQuery(name = "LokSabhaNominate.findByNominatedByAccessId", query = "SELECT l FROM LokSabhaNominate l WHERE l.nominatedByAccessId = :nominatedByAccessId"),
     @NamedQuery(name = "LokSabhaNominate.findByNominatedByEmail", query = "SELECT l FROM LokSabhaNominate l WHERE l.nominatedByEmail = :nominatedByEmail"),
     @NamedQuery(name = "LokSabhaNominate.findByNominatedOn", query = "SELECT l FROM LokSabhaNominate l WHERE l.nominatedOn = :nominatedOn"),
     @NamedQuery(name = "LokSabhaNominate.findByNominationCount", query = "SELECT l FROM LokSabhaNominate l WHERE l.nominationCount = :nominationCount"),
-    @NamedQuery(name = "LokSabhaNominate.findByStateCode", query = "SELECT l FROM LokSabhaNominate l WHERE l.stateCode = :stateCode")})
+    @NamedQuery(name = "LokSabhaNominate.findByStateCode", query = "SELECT l FROM LokSabhaNominate l WHERE l.stateCode = :stateCode"),
+    @NamedQuery(name = "LokSabhaNominate.findForStateCodeAndConstituency", query = "SELECT l FROM LokSabhaNominate l WHERE l.stateCode = :stateCode and l.constituency=:constituency")
+})
 public class LokSabhaNominate implements Serializable {
 
     private static final long serialVersionUID = 1L;

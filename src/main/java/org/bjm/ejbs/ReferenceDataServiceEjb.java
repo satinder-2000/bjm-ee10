@@ -43,22 +43,22 @@ public class ReferenceDataServiceEjb implements ReferenceDataServiceEjbLocal {
         allStates=query.getResultList();
         LOGGER.info("Count of States loaded "+allStates.size());
         lokSabhaMap=new HashMap<>();
-        Set<String> stateCodes=lokSabhaMap.keySet();
-        for(String stateCode: stateCodes){
-            query= em.createNamedQuery("LokSabha.findByStateCode", LokSabha.class);
-            query.setParameter(1, stateCode);
-            lokSabhaMap.put(stateCode, query.getResultList());
+        for(State state : allStates){
+            Query queryLs= em.createNamedQuery("LokSabha.findByStateCode", LokSabha.class);
+            queryLs.setParameter("stateCode", state.getCode());
+            List<LokSabha> stateLokSabhas=queryLs.getResultList();
+            lokSabhaMap.put(state.getCode(), stateLokSabhas);
             String logStr="Count of LokSabhas for State %s is %d";
-            String result=String.format(logStr, stateCode, query.getResultList().size());
+            String result=String.format(logStr, state.getCode(), queryLs.getResultList().size());
             LOGGER.info(result);
         }
         vidhanSabhaMap=new HashMap<>();
-        for(String stateCode: stateCodes){
-            query= em.createNamedQuery("VidhanSabha.findByStateCode", VidhanSabha.class);
-            query.setParameter(1, stateCode);
-            vidhanSabhaMap.put(stateCode, query.getResultList());
+        for(State state : allStates){
+            Query queryVs= em.createNamedQuery("VidhanSabha.findByStateCode", VidhanSabha.class);
+            queryVs.setParameter("stateCode", state.getCode());
+            vidhanSabhaMap.put(state.getCode(), queryVs.getResultList());
             String logStr="Count of VidhanSabhas for State %s is %d";
-            String result=String.format(logStr, stateCode, query.getResultList().size());
+            String result=String.format(logStr, state.getCode(), queryVs.getResultList().size());
             LOGGER.info(result);
         }
         
@@ -91,7 +91,7 @@ public class ReferenceDataServiceEjb implements ReferenceDataServiceEjbLocal {
     @Override
     public List<String> getForumSubCategories(String category) {
         Query query=em.createNamedQuery("ForumCategory.findByType", ForumCategory.class);
-        query.setParameter(1, category);
+        query.setParameter("type", category);
         List<ForumCategory> forumCategories = query.getResultList();
         Set<String> forumSubCategoriesSet=new HashSet<>();
         for (ForumCategory fc: forumCategories){
@@ -128,7 +128,7 @@ public class ReferenceDataServiceEjb implements ReferenceDataServiceEjbLocal {
     @Override
     public List<String> getSurveySubCategories(String category) {
         Query query=em.createNamedQuery("SurveyCategory.findByType", SurveyCategory.class);
-        query.setParameter(1, category);
+        query.setParameter("type", category);
         List<SurveyCategory> surveyCategories = query.getResultList();
         Set<String> surveySubCategoriesSet=new HashSet<>();
         for (SurveyCategory sc: surveyCategories){
@@ -161,15 +161,15 @@ public class ReferenceDataServiceEjb implements ReferenceDataServiceEjbLocal {
     @Override
     public State findStateByName(String name) {
         Query query = em.createNamedQuery("State.findByName", State.class);
-        query.setParameter(1, name);
+        query.setParameter("name", name);
         return (State) query.getSingleResult();
     }
 
     @Override
     public List<LokSabhaNominate> getLokSabhaNominationsForConstituency(String stateCode, String constituency) {
         Query query = em.createNamedQuery("LokSabhaNominate.findForStateCodeAndConstituency", LokSabhaNominate.class);
-        query.setParameter(1, stateCode);
-        query.setParameter(2, constituency);
+        query.setParameter("stateCode", stateCode);
+        query.setParameter("constituency", constituency);
         List<LokSabhaNominate> toReturn = query.getResultList();
         LOGGER.info(String.format("Found %d Nominations for StateCode %s and LokSabha Constituency %s",toReturn.size(), stateCode, constituency));
         return toReturn;
@@ -179,19 +179,27 @@ public class ReferenceDataServiceEjb implements ReferenceDataServiceEjbLocal {
     @Override
     public LokSabhaNominate findByLSNominatedCandidate(String stateCode, String candidateName) {
         Query query = em.createNamedQuery("LokSabhaNominate.findByCandidateName", LokSabhaNominate.class);
-        query.setParameter(1, stateCode);
-        query.setParameter(2, candidateName);
+        query.setParameter("stateCode", stateCode);
+        query.setParameter("candidateName", candidateName);
         return (LokSabhaNominate)query.getSingleResult();
     }
 
     @Override
     public List<VidhanSabhaNominate> getVidhanSabhaNominationsForConstituency(String stateCode, String constituency) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Query query = em.createNamedQuery("VidhanSabhaNominate.findForStateCodeAndConstituency", VidhanSabhaNominate.class);
+        query.setParameter("stateCode", stateCode);
+        query.setParameter("constituency", constituency);
+        List<VidhanSabhaNominate> toReturn = query.getResultList();
+        LOGGER.info(String.format("Found %d Nominations for StateCode %s and VidhanSabha Constituency %s",toReturn.size(), stateCode, constituency));
+        return toReturn;
     }
 
     @Override
     public VidhanSabhaNominate findByVSNominatedCandidate(String stateCode, String candidateName) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Query query = em.createNamedQuery("VidhanSabhaNominate.findByCandidateName", VidhanSabhaNominate.class);
+        query.setParameter("stateCode", stateCode);
+        query.setParameter("candidateName", candidateName);
+        return (VidhanSabhaNominate)query.getSingleResult();
     }
 
     

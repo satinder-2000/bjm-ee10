@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.bjm.entities;
 
 import jakarta.persistence.Basic;
@@ -29,13 +25,15 @@ import java.util.Date;
 @NamedQueries({
     @NamedQuery(name = "VidhanSabhaNominate.findAll", query = "SELECT v FROM VidhanSabhaNominate v"),
     @NamedQuery(name = "VidhanSabhaNominate.findById", query = "SELECT v FROM VidhanSabhaNominate v WHERE v.id = :id"),
-    @NamedQuery(name = "VidhanSabhaNominate.findByCandidateName", query = "SELECT v FROM VidhanSabhaNominate v WHERE v.candidateName = :candidateName"),
+    @NamedQuery(name = "VidhanSabhaNominate.findByCandidateName", query = "SELECT v FROM VidhanSabhaNominate v WHERE v.stateCode=:stateCode AND v.candidateName = :candidateName"),
     @NamedQuery(name = "VidhanSabhaNominate.findByConstituency", query = "SELECT v FROM VidhanSabhaNominate v WHERE v.constituency = :constituency"),
     @NamedQuery(name = "VidhanSabhaNominate.findByNominatedByAccessId", query = "SELECT v FROM VidhanSabhaNominate v WHERE v.nominatedByAccessId = :nominatedByAccessId"),
     @NamedQuery(name = "VidhanSabhaNominate.findByNominatedByEmail", query = "SELECT v FROM VidhanSabhaNominate v WHERE v.nominatedByEmail = :nominatedByEmail"),
     @NamedQuery(name = "VidhanSabhaNominate.findByNominatedOn", query = "SELECT v FROM VidhanSabhaNominate v WHERE v.nominatedOn = :nominatedOn"),
     @NamedQuery(name = "VidhanSabhaNominate.findByNominationCount", query = "SELECT v FROM VidhanSabhaNominate v WHERE v.nominationCount = :nominationCount"),
-    @NamedQuery(name = "VidhanSabhaNominate.findByStateCode", query = "SELECT v FROM VidhanSabhaNominate v WHERE v.stateCode = :stateCode")})
+    @NamedQuery(name = "VidhanSabhaNominate.findByStateCode", query = "SELECT v FROM VidhanSabhaNominate v WHERE v.stateCode = :stateCode"),
+    @NamedQuery(name = "VidhanSabhaNominate.findForStateCodeAndConstituency", query = "SELECT v FROM VidhanSabhaNominate v WHERE v.stateCode = :stateCode and v.constituency=:constituency")
+})
 public class VidhanSabhaNominate implements Serializable {
 
     private static final long serialVersionUID = 1L;

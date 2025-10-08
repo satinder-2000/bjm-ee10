@@ -24,7 +24,7 @@ public class SurveyServiceEjb implements SurveyServiceEjbLocal {
     @Override
     public Survey findById(int surveyId) {
         Query query=em.createNamedQuery("Survey.findById", Survey.class);
-        query.setParameter(1, surveyId);
+        query.setParameter("id", surveyId);
         return (Survey)query.getSingleResult();
     }
 

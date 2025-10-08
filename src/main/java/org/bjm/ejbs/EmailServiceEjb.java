@@ -33,8 +33,8 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
     
     private static final Logger LOGGER = Logger.getLogger(EmailServiceEjb.class.getName());
     
-    @Resource(mappedName = "java:comp/env/mail/bjm")//Tomee
-    //@Resource(mappedName = "mail/bjm")//Payara
+    //@Resource(mappedName = "java:comp/env/mail/bjm")//Tomee
+    @Resource(mappedName = "mail/bjm")//Payara
     private Session session;
     
     @Resource(name = "webURI")

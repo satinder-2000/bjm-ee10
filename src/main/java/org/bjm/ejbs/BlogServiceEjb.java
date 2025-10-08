@@ -23,8 +23,8 @@ public class BlogServiceEjb implements BlogServiceEjbLocal {
 
     @Override
     public List<Blog> findByUserId(int userId) {
-        Query query=em.createNamedQuery("Blog.findByUserId", Blog.class);
-        query.setParameter(1, userId);
+        Query query=em.createNamedQuery("Blog.findByPublishedByAccessId", Blog.class);
+        query.setParameter("publishedByAccessId", userId);
         List<Blog> toReturn=query.getResultList();
         LOGGER.info(String.format("Count of Blogs for UserId %d is %d", userId, toReturn.size()));
         return toReturn;
@@ -32,8 +32,8 @@ public class BlogServiceEjb implements BlogServiceEjbLocal {
 
     @Override
     public Blog findByBlogId(int blogId) {
-        Query query=em.createNamedQuery("Blog.findByBlogId", Blog.class);
-        query.setParameter(1, blogId);
+        Query query=em.createNamedQuery("Blog.findById", Blog.class);
+        query.setParameter("id", blogId);
         Blog toReturn=(Blog)query.getSingleResult();
         LOGGER.info(String.format("Blog %d extracted.", blogId));
         return toReturn;
@@ -42,7 +42,8 @@ public class BlogServiceEjb implements BlogServiceEjbLocal {
     @Override
     public List<Blog> findRecentNBlogs(int count) {
         Query query=em.createNamedQuery("Blog.findNBlogs", Blog.class);
-        query.setParameter(1, count);
+        query.setParameter("limit", count);
+        query.setMaxResults(count);
         List<Blog> toReturn=query.getResultList();
         LOGGER.info(String.format("Count of Blogs for extracted is %d", toReturn.size()));
         return toReturn;
@@ -58,8 +59,8 @@ public class BlogServiceEjb implements BlogServiceEjbLocal {
 
     @Override
     public List<BlogComment> findAllCommentsOnBlog(int blogId) {
-        Query query = em.createNamedQuery("BlogComment.findAllForBlog", BlogComment.class);
-        query.setParameter(1, blogId);
+        Query query = em.createNamedQuery("BlogComment.findByBlogId", BlogComment.class);
+        query.setParameter("blogId", blogId);
         List<BlogComment> toReturn =query.getResultList();
         LOGGER.info(String.format("Count of Blogs for extracted for Blog %d is %d",blogId, toReturn.size()));
         return toReturn;

@@ -62,6 +62,7 @@ public class UserRegisterMBean implements Serializable{
     @PostConstruct
     public void init(){
         userDto= new UserDto();
+        userDto.setAllStates(new ArrayList());
         List<State> allStates=referenceDataServiceEjbLocal.getAllStates();
         State dummy=new State();
         dummy.setCode("--");

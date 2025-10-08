@@ -77,7 +77,7 @@ public class UserServiceEjb implements UserServiceEjbLocal {
     @Override
     public boolean isUserRegistered(String email) {
         Query query=em.createNamedQuery("User.findByEmail", User.class);
-        query.setParameter(1, email);
+        query.setParameter("email", email);
         if(query.getFirstResult()==0){
             return false;
         }else{
@@ -88,7 +88,7 @@ public class UserServiceEjb implements UserServiceEjbLocal {
     @Override
     public Access getAccessByEmail(String email) {
         Query query=em.createNamedQuery("Access.findByEmail", Access.class);
-        query.setParameter(1, email);
+        query.setParameter("email", email);
         access= (Access)query.getResultList().get(0);
         return access;
     }
@@ -96,7 +96,7 @@ public class UserServiceEjb implements UserServiceEjbLocal {
     @Override
     public Access getAccessById(int id) {
         Query query=em.createNamedQuery("Access.findById", Access.class);
-        query.setParameter(1, id);
+        query.setParameter("id", id);
         access= (Access)query.getResultList().get(0);
         return access;
     }
@@ -132,30 +132,30 @@ public class UserServiceEjb implements UserServiceEjbLocal {
 
     @Override
     public List<Forum> getUserForums(String email) {
-        Query query=em.createNamedQuery("Forum.findByEmail", Forum.class);
-        query.setParameter(1, email);
+        Query query=em.createNamedQuery("Forum.findByForumCreatorEmail", Forum.class);
+        query.setParameter("forumCreatorEmail", email);
         return query.getResultList();
     
     }
 
     @Override
     public List<Survey> getUserSurveys(String email) {
-        Query query=em.createNamedQuery("Survey.findByEmail", Survey.class);
-        query.setParameter(1, email);
+        Query query=em.createNamedQuery("Survey.findBySurveyCreatorEmail", Survey.class);
+        query.setParameter("surveyCreatorEmail", email);
         return query.getResultList();
     }
 
     @Override
     public List<SurveyFromForum> getUserSurveyFromForums(String email) {
-        Query query=em.createNamedQuery("SurveyFromForum.findByEmail", SurveyFromForum.class);
-        query.setParameter(1, email);
+        Query query=em.createNamedQuery("SurveyFromForum.findBySurveyCreatorEmail", SurveyFromForum.class);
+        query.setParameter("surveyCreatorEmail", email);
         return query.getResultList();
     }
 
     @Override
     public List<Blog> getUserBlogs(String email) {
-        Query query=em.createNamedQuery("Blog.findByEmail", Survey.class);
-        query.setParameter(1, email);
+        Query query=em.createNamedQuery("Blog.findByPublishedByEmail", Survey.class);
+        query.setParameter("publishedByEmail", email);
         return query.getResultList();
     }
 
@@ -204,14 +204,14 @@ public class UserServiceEjb implements UserServiceEjbLocal {
     @Override
     public Forum getUserForum(int forumId) {
         Query query =em.createNamedQuery("Forum.findById", Forum.class);
-        query.setParameter(1, forumId);
+        query.setParameter("id", forumId);
         return (Forum)query.getResultList().get(0);
     }
 
     @Override
     public User getUserByEmail(String email) {
      Query query =em.createNamedQuery("User.findByEmail", User.class);
-     query.setParameter(1, email);
+     query.setParameter("email", email);
      return (User)query.getResultList().get(0);}
 
     @Override
@@ -269,7 +269,7 @@ public class UserServiceEjb implements UserServiceEjbLocal {
     @Override
     public BlogComment findByBlogCommentById(int id) {
         Query query = em.createNamedQuery("BlogComment.findById", BlogComment.class);
-        query.setParameter(1, id);
+        query.setParameter("id", id);
         return (BlogComment) query.getSingleResult();
                 
     }
@@ -277,21 +277,21 @@ public class UserServiceEjb implements UserServiceEjbLocal {
     @Override
     public ForumComment findByForumCommentById(int id) {
         Query query = em.createNamedQuery("ForumComment.findById", ForumComment.class);
-        query.setParameter(1, id);
+        query.setParameter("id", id);
         return (ForumComment) query.getSingleResult();
     }
 
     @Override
     public SurveyVote findBySurveyVoteById(int id) {
         Query query = em.createNamedQuery("SurveyVote.findById", SurveyVote.class);
-        query.setParameter(1, id);
+        query.setParameter("id", id);
         return (SurveyVote) query.getSingleResult();
     }
 
     @Override
     public SurveyFromForumVote findBySurveyFromForumVoteById(int id) {
         Query query = em.createNamedQuery("SurveyFromForumVote.findById", SurveyFromForumVote.class);
-        query.setParameter(1, id);
+        query.setParameter("id", id);
         return (SurveyFromForumVote) query.getSingleResult();
     }
 
