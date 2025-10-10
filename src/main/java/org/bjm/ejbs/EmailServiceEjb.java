@@ -33,8 +33,8 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
     
     private static final Logger LOGGER = Logger.getLogger(EmailServiceEjb.class.getName());
     
-    //@Resource(mappedName = "java:comp/env/mail/bjm")//Tomee
-    @Resource(mappedName = "mail/bjm")//Payara
+    @Resource(mappedName = "java:comp/env/mail/bjm")//Tomee
+    //@Resource(mappedName = "mail/bjm")//Payara
     private Session session;
     
     @Resource(name = "webURI")
@@ -54,19 +54,39 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
     
     @PostConstruct
     public void init(){
-        final URLName url = new URLName(
-                    session.getProperty("mail.transport.protocol"),
-                    session.getProperty("mail.smtp.host"), -1, null,
-                    session.getProperty("mail.smtp.user"), null);
-        session.setPasswordAuthentication(url, new PasswordAuthentication(session.getProperty("mail.smtp.user"), session.getProperty("mail.smtp.password")));
+        /*String protocol=session.getProperty("mail.transport.protocol");
+        String host = session.getProperty("mail.smtp.host");
+        String portStr=session.getProperty("mail.smtp.port");
+        int port = Integer.parseInt(portStr);
+        String file = null;
+        String username=session.getProperty("mail.smtp.user");
+        String password=session.getProperty("password");
+        
+        final URLName url = new URLName(protocol, host, port, file, username, password);
+        session.setPasswordAuthentication(url, new PasswordAuthentication(host, password)); */
         LOGGER.info("MailSession set successfully!!");
+    }
+    
+    private Session getAuthenticatedSession(){
+        String protocol=session.getProperty("mail.transport.protocol");
+            String host = session.getProperty("mail.smtp.host");
+            String portStr=session.getProperty("mail.smtp.port");
+            int port = Integer.parseInt(portStr);
+            String file = null;
+            String username=session.getProperty("mail.user");
+            String password=session.getProperty("password");
+        
+            URLName url = new URLName(protocol, host, port, file, username, password);
+            session.setPasswordAuthentication(url, new PasswordAuthentication(host, password));
+            return session;
+    
     }
 
     @Override
     public void sendUserRegisteredEmail(Access access) {
         try {
-            Message mimeMessage = new MimeMessage(session);
-            mimeMessage.setFrom(new InternetAddress(session.getProperty("mail.smtp.user")));
+            Message mimeMessage = new MimeMessage(getAuthenticatedSession());
+            mimeMessage.setFrom(new InternetAddress(session.getProperty("mail.user")));
             mimeMessage.setRecipient(Message.RecipientType.TO,
                     new InternetAddress(access.getEmail()));
             mimeMessage.setSubject("User Registration");
@@ -97,7 +117,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
 
     @Override
     public void sendAccessCreatedEmail(Access access) {
-        MimeMessage mimeMessage= new MimeMessage(session);
+        MimeMessage mimeMessage= new MimeMessage(getAuthenticatedSession());
         Multipart multipart= new MimeMultipart();
         StringBuilder htmlMsg = new StringBuilder("<html><body>");
         htmlMsg.append("<h2>Dear, ").append(access.getEmail()).append("</h2>");
@@ -112,7 +132,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
         try{
             htmlPart.setContent( htmlMsg.toString(), "text/html; charset=utf-8" );
             multipart.addBodyPart(htmlPart);
-            mimeMessage.setFrom(new InternetAddress(session.getProperty("mail.smtp.user")));
+            mimeMessage.setFrom(new InternetAddress(session.getProperty("mail.user")));
             mimeMessage.setRecipient(Message.RecipientType.TO,new InternetAddress(access.getEmail()));
             mimeMessage.setContent(multipart);
             mimeMessage.setSubject("Welcome. Access Confirmed!!");
@@ -125,7 +145,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
 
     @Override
     public void sendForumCreatedEmail(Access access, Forum forum) {
-        MimeMessage mimeMessage = new MimeMessage(session);
+        MimeMessage mimeMessage = new MimeMessage(getAuthenticatedSession());
         Multipart multipart = new MimeMultipart();
         StringBuilder htmlMsg = new StringBuilder("<html><body>");
         htmlMsg.append("<h2>Dear, ").append(access.getEmail()).append("</h2>");
@@ -142,7 +162,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
         try {
             htmlPart.setContent(htmlMsg.toString(), "text/html; charset=utf-8");
             multipart.addBodyPart(htmlPart);
-            mimeMessage.setFrom(new InternetAddress(session.getProperty("mail.smtp.user")));
+            mimeMessage.setFrom(new InternetAddress(session.getProperty("mail.user")));
             mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(access.getEmail()));
             mimeMessage.setContent(multipart);
             mimeMessage.setSubject("Forum Created");
@@ -155,7 +175,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
 
     @Override
     public void sendSurveyCreatedEmail(Access access, Survey survey) {
-        MimeMessage mimeMessage = new MimeMessage(session);
+        MimeMessage mimeMessage = new MimeMessage(getAuthenticatedSession());
         Multipart multipart = new MimeMultipart();
         StringBuilder htmlMsg = new StringBuilder("<html><body>");
         htmlMsg.append("<h2>Dear, ").append(access.getEmail()).append("</h2>");
@@ -172,7 +192,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
         try {
             htmlPart.setContent(htmlMsg.toString(), "text/html; charset=utf-8");
             multipart.addBodyPart(htmlPart);
-            mimeMessage.setFrom(new InternetAddress(session.getProperty("mail.smtp.user")));
+            mimeMessage.setFrom(new InternetAddress(session.getProperty("mail.user")));
             mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(access.getEmail()));
             mimeMessage.setContent(multipart);
             mimeMessage.setSubject("Survey Created");
@@ -185,7 +205,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
 
     @Override
     public void sendSurveyCreatedFromForumEmail(Access access, SurveyFromForum surveyFromForum) {
-        MimeMessage mimeMessage = new MimeMessage(session);
+        MimeMessage mimeMessage = new MimeMessage(getAuthenticatedSession());
         Multipart multipart = new MimeMultipart();
         StringBuilder htmlMsg = new StringBuilder("<html><body>");
         htmlMsg.append("<h2>Dear, ").append(access.getEmail()).append("</h2>");
@@ -202,7 +222,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
         try {
             htmlPart.setContent(htmlMsg.toString(), "text/html; charset=utf-8");
             multipart.addBodyPart(htmlPart);
-            mimeMessage.setFrom(new InternetAddress(session.getProperty("mail.smtp.user")));
+            mimeMessage.setFrom(new InternetAddress(session.getProperty("mail.user")));
             mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(access.getEmail()));
             mimeMessage.setContent(multipart);
             mimeMessage.setSubject("Survey From Forum Created");
@@ -215,7 +235,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
 
     @Override
     public void sendPasswordChangedEmail(Access access) {
-        MimeMessage mimeMessage = new MimeMessage(session);
+        MimeMessage mimeMessage = new MimeMessage(getAuthenticatedSession());
         Multipart multipart = new MimeMultipart();
         StringBuilder htmlMsg = new StringBuilder("<html><body>");
         htmlMsg.append("<h2>Dear, ").append(access.getEmail()).append("</h2>");
@@ -226,7 +246,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
         try {
             htmlPart.setContent(htmlMsg.toString(), "text/html; charset=utf-8");
             multipart.addBodyPart(htmlPart);
-            mimeMessage.setFrom(new InternetAddress(session.getProperty("mail.smtp.user")));
+            mimeMessage.setFrom(new InternetAddress(session.getProperty("mail.user")));
             mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(access.getEmail()));
             mimeMessage.setContent(multipart);
             mimeMessage.setSubject("Password changed");
@@ -239,7 +259,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
 
     @Override
     public void sendUserStateChangedEmail(User user) {
-        MimeMessage mimeMessage = new MimeMessage(session);
+        MimeMessage mimeMessage = new MimeMessage(getAuthenticatedSession());
         Multipart multipart = new MimeMultipart();
         StringBuilder htmlMsg = new StringBuilder("<html><body>");
         htmlMsg.append("<h2>Dear, ").append(user.getEmail()).append("</h2>");
@@ -250,7 +270,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
         try {
             htmlPart.setContent(htmlMsg.toString(), "text/html; charset=utf-8");
             multipart.addBodyPart(htmlPart);
-            mimeMessage.setFrom(new InternetAddress(session.getProperty("mail.smtp.user")));
+            mimeMessage.setFrom(new InternetAddress(session.getProperty("mail.user")));
             mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(user.getEmail()));
             mimeMessage.setContent(multipart);
             mimeMessage.setSubject("State of residence changed");
@@ -263,7 +283,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
 
     @Override
     public void sendUserPersonalDetailsChangedEmail(User user) {
-        MimeMessage mimeMessage = new MimeMessage(session);
+        MimeMessage mimeMessage = new MimeMessage(getAuthenticatedSession());
         Multipart multipart = new MimeMultipart();
         StringBuilder htmlMsg = new StringBuilder("<html><body>");
         htmlMsg.append("<h2>Dear, ").append(user.getEmail()).append("</h2>");
@@ -274,7 +294,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
         try {
             htmlPart.setContent(htmlMsg.toString(), "text/html; charset=utf-8");
             multipart.addBodyPart(htmlPart);
-            mimeMessage.setFrom(new InternetAddress(session.getProperty("mail.smtp.user")));
+            mimeMessage.setFrom(new InternetAddress(session.getProperty("mail.user")));
             mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(user.getEmail()));
             mimeMessage.setContent(multipart);
             mimeMessage.setSubject("Personal details changed");
@@ -287,7 +307,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
 
     @Override
     public void sendBlogCreatedEmail(Access access, Blog blog) {
-        MimeMessage mimeMessage = new MimeMessage(session);
+        MimeMessage mimeMessage = new MimeMessage(getAuthenticatedSession());
         Multipart multipart = new MimeMultipart();
         StringBuilder htmlMsg = new StringBuilder("<html><body>");
         htmlMsg.append("<h2>Dear, ").append(access.getEmail()).append("</h2>");
@@ -298,7 +318,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
         try {
             htmlPart.setContent(htmlMsg.toString(), "text/html; charset=utf-8");
             multipart.addBodyPart(htmlPart);
-            mimeMessage.setFrom(new InternetAddress(session.getProperty("mail.smtp.user")));
+            mimeMessage.setFrom(new InternetAddress(session.getProperty("mail.user")));
             mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(access.getEmail()));
             mimeMessage.setContent(multipart);
             mimeMessage.setSubject("Your Blog has been published");
@@ -311,7 +331,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
 
     @Override
     public void sendContactUsEmail(String adminEmail, String userEmail, String subject, String message) {
-        MimeMessage mimeMessage = new MimeMessage(session);
+        MimeMessage mimeMessage = new MimeMessage(getAuthenticatedSession());
         Multipart multipart = new MimeMultipart();
         StringBuilder htmlMsg = new StringBuilder("<html><body>");
         htmlMsg.append("<h2>Dear, ").append(adminEmail).append("</h2>");
@@ -323,7 +343,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
         try {
             htmlPart.setContent(htmlMsg.toString(), "text/html; charset=utf-8");
             multipart.addBodyPart(htmlPart);
-            mimeMessage.setSender(new InternetAddress(session.getProperty("mail.smtp.user")));
+            mimeMessage.setSender(new InternetAddress(session.getProperty("mail.user")));
             mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(adminEmail));
             mimeMessage.setRecipient(Message.RecipientType.CC, new InternetAddress(userEmail));
             mimeMessage.setContent(multipart);
@@ -337,7 +357,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
 
     @Override
     public void sendNewLokSabhaNominationEmail(User user, LokSabhaNominate lokSabhaNominate) {
-        MimeMessage mimeMessage = new MimeMessage(session);
+        MimeMessage mimeMessage = new MimeMessage(getAuthenticatedSession());
         Multipart multipart = new MimeMultipart();
         StringBuilder htmlMsg = new StringBuilder("<html><body>");
         htmlMsg.append("<h2>Dear, ").append(user.getEmail()).append("</h2>");
@@ -348,7 +368,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
         try {
             htmlPart.setContent(htmlMsg.toString(), "text/html; charset=utf-8");
             multipart.addBodyPart(htmlPart);
-            mimeMessage.setFrom(new InternetAddress(session.getProperty("mail.smtp.user")));
+            mimeMessage.setFrom(new InternetAddress(session.getProperty("mail.user")));
             mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(user.getEmail()));
             mimeMessage.setContent(multipart);
             mimeMessage.setSubject("New Lok Sabha Nomination");
@@ -361,7 +381,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
 
     @Override
     public void sendLokSabhaReNominationEmail(User user, LokSabhaNominate lokSabhaNominate) {
-        MimeMessage mimeMessage = new MimeMessage(session);
+        MimeMessage mimeMessage = new MimeMessage(getAuthenticatedSession());
         Multipart multipart = new MimeMultipart();
         StringBuilder htmlMsg = new StringBuilder("<html><body>");
         htmlMsg.append("<h2>Dear, ").append(user.getEmail()).append("</h2>");
@@ -372,7 +392,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
         try {
             htmlPart.setContent(htmlMsg.toString(), "text/html; charset=utf-8");
             multipart.addBodyPart(htmlPart);
-            mimeMessage.setFrom(new InternetAddress(session.getProperty("mail.smtp.user")));
+            mimeMessage.setFrom(new InternetAddress(session.getProperty("mail.user")));
             mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(user.getEmail()));
             mimeMessage.setContent(multipart);
             mimeMessage.setSubject("Lok Sabha Nomination");
@@ -385,7 +405,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
 
     @Override
     public void sendNewVidhanSabhaNominationEmail(User user, VidhanSabhaNominate vidhanSabhaNominate) {
-        MimeMessage mimeMessage = new MimeMessage(session);
+        MimeMessage mimeMessage = new MimeMessage(getAuthenticatedSession());
         Multipart multipart = new MimeMultipart();
         StringBuilder htmlMsg = new StringBuilder("<html><body>");
         htmlMsg.append("<h2>Dear, ").append(user.getEmail()).append("</h2>");
@@ -396,7 +416,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
         try {
             htmlPart.setContent(htmlMsg.toString(), "text/html; charset=utf-8");
             multipart.addBodyPart(htmlPart);
-            mimeMessage.setFrom(new InternetAddress(session.getProperty("mail.smtp.user")));
+            mimeMessage.setFrom(new InternetAddress(session.getProperty("mail.user")));
             mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(user.getEmail()));
             mimeMessage.setContent(multipart);
             mimeMessage.setSubject("New Vidhan Sabha Nomination");
@@ -409,7 +429,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
 
     @Override
     public void sendVidhanSabhaReNominationEmail(User user, VidhanSabhaNominate vidhanSabhaNominate) {
-        MimeMessage mimeMessage = new MimeMessage(session);
+        MimeMessage mimeMessage = new MimeMessage(getAuthenticatedSession());
         Multipart multipart = new MimeMultipart();
         StringBuilder htmlMsg = new StringBuilder("<html><body>");
         htmlMsg.append("<h2>Dear, ").append(user.getEmail()).append("</h2>");
@@ -420,7 +440,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
         try {
             htmlPart.setContent(htmlMsg.toString(), "text/html; charset=utf-8");
             multipart.addBodyPart(htmlPart);
-            mimeMessage.setFrom(new InternetAddress(session.getProperty("mail.smtp.user")));
+            mimeMessage.setFrom(new InternetAddress(session.getProperty("mail.user")));
             mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(user.getEmail()));
             mimeMessage.setContent(multipart);
             mimeMessage.setSubject("Vidhan Sabha Nomination");

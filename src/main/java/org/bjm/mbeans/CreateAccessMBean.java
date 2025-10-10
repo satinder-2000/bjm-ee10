@@ -38,14 +38,10 @@ public class CreateAccessMBean implements Serializable {
     public void init(){
         HttpServletRequest request=(HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String email = request.getParameter("email");
-        if(!userServiceEjbLocal.isUserRegistered(email)){
-            FacesContext.getCurrentInstance().addMessage("email", 
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email not found.","Email not found."));
-        }else{
-            accessDto=new AccessDto();
-            accessDto.setEmail(access.getEmail());
-            LOGGER.info(String.format("Access loaded for email %s", request.getParameter("email")));
-        }
+        access=userServiceEjbLocal.getAccessByEmail(email);
+        accessDto=new AccessDto();
+        accessDto.setEmail(access.getEmail());
+        LOGGER.info(String.format("Access loaded for email %s", request.getParameter("email")));
     }
     
     public String createAccess(){
