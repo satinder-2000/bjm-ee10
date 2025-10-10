@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
+    <mime-mapping>
+    <extension>png <!--{or the extension of file}--></extension>
+    <mime-type>text/html</mime-type>
+  </mime-mapping>
     <context-param>
         <param-name>jakarta.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
@@ -64,6 +68,10 @@
     <context-param>
         <param-name>createAccessURI</param-name>
         <param-value>createAccess.xhtml?email=%s</param-value>
+    </context-param>
+    <context-param>
+        <param-name>zoneId</param-name>
+        <param-value>Asia/Kolkata</param-value>
     </context-param>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>

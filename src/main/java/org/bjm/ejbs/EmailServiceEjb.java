@@ -54,11 +54,16 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
     
     @PostConstruct
     public void init(){
-        final URLName url = new URLName(
-                    session.getProperty("mail.transport.protocol"),
-                    session.getProperty("mail.smtp.host"), -1, null,
-                    session.getProperty("mail.smtp.user"), null);
-        session.setPasswordAuthentication(url, new PasswordAuthentication(session.getProperty("mail.smtp.user"), session.getProperty("mail.smtp.password")));
+        /*String protocol=session.getProperty("mail.transport.protocol");
+        String host = session.getProperty("mail.smtp.host");
+        String portStr=session.getProperty("mail.smtp.port");
+        int port = Integer.parseInt(portStr);
+        String file = null;
+        String username=session.getProperty("mail.smtp.user");
+        String password=session.getProperty("password");
+        
+        final URLName url = new URLName(protocol, host, port, file, username, password);
+        session.setPasswordAuthentication(url, new PasswordAuthentication(host, password)); */
         LOGGER.info("MailSession set successfully!!");
     }
 
@@ -66,7 +71,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
     public void sendUserRegisteredEmail(Access access) {
         try {
             Message mimeMessage = new MimeMessage(session);
-            mimeMessage.setFrom(new InternetAddress(session.getProperty("mail.smtp.user")));
+            //mimeMessage.setFrom(new InternetAddress(session.getProperty("mail.smtp.user")));
             mimeMessage.setRecipient(Message.RecipientType.TO,
                     new InternetAddress(access.getEmail()));
             mimeMessage.setSubject("User Registration");

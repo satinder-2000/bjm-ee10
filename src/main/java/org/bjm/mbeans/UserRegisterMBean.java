@@ -104,11 +104,14 @@ public class UserRegisterMBean implements Serializable{
         for(State s: userDto.getAllStates()){
             if(s.getCode().equals(userDto.getStateCode())){
                 userDto.setState(s);
+                userDto.setStateName(s.getName());
                 break;
             }
         }
         //Profile File next
         processProfileFile();
+        ServletContext servletContext= (ServletContext)FacesContext.getCurrentInstance().getExternalContext().getContext();
+        userDto.setZoneId(servletContext.getInitParameter("zoneId"));
         
         //HttpServletRequest request= (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
         //HttpSession session=request.getSession();

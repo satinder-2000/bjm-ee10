@@ -9,12 +9,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  *
@@ -69,8 +67,7 @@ public class User implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "dob")
-    @Temporal(TemporalType.DATE)
-    private Date dob;
+    private char[] dob;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 15)
@@ -96,13 +93,11 @@ public class User implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "createdOn")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdOn;
+    private Timestamp createdOn;
     @Basic(optional = false)
     @NotNull
     @Column(name = "updatedOn")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updatedOn;
+    private Timestamp updatedOn;
 
     public User() {
     }
@@ -111,7 +106,7 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User(Integer id, String email, String firstName, String lastName, String gender, Date dob, String mobile, String stateName, String lokSabhaConstituency, Date createdOn, Date updatedOn,
+    public User(Integer id, String email, String firstName, String lastName, String gender, char[] dob, String mobile, String stateName, String lokSabhaConstituency, Timestamp createdOn, Timestamp updatedOn,
             String vidhanSabhaConstituency) {
         this.id = id;
         this.email = email;
@@ -167,13 +162,15 @@ public class User implements Serializable {
         this.gender = gender;
     }
 
-    public Date getDob() {
+    public char[] getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(char[] dob) {
         this.dob = dob;
     }
+
+    
 
     public String getMobile() {
         return mobile;
@@ -215,21 +212,23 @@ public class User implements Serializable {
         this.vidhanSabhaConstituency = vidhanSabhaConstituency;
     }
 
-    public Date getCreatedOn() {
+    public Timestamp getCreatedOn() {
         return createdOn;
     }
 
-    public void setCreatedOn(Date createdOn) {
+    public void setCreatedOn(Timestamp createdOn) {
         this.createdOn = createdOn;
     }
 
-    public Date getUpdatedOn() {
+    public Timestamp getUpdatedOn() {
         return updatedOn;
     }
 
-    public void setUpdatedOn(Date updatedOn) {
+    public void setUpdatedOn(Timestamp updatedOn) {
         this.updatedOn = updatedOn;
     }
+
+    
 
     @Override
     public int hashCode() {

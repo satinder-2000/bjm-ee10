@@ -5,7 +5,6 @@ import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -54,15 +53,22 @@ public class UserServiceEjb implements UserServiceEjbLocal {
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
         user.setGender(userDto.getGender());
-        user.setDob(Date.valueOf(userDto.getDob()));
+        user.setDob(userDto.getDob().toCharArray());
         user.setMobile(userDto.getMobile());
+        user.setPhone(userDto.getPhone());
         user.setStateName(userDto.getStateName());
         user.setLokSabhaConstituency(userDto.getLokSabha());
+        user.setVidhanSabhaConstituency(userDto.getVidhanSabha());
+        user.setCreatedOn(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(userDto.getZoneId()))));
+        user.setUpdatedOn(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(userDto.getZoneId()))));
         
-        Access access= new Access();
+        access= new Access();
         access.setEmail(userDto.getEmail());
-        access.setCreatedOn(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("Asia/Kolkata"))));
-        access.setUpdatedOn(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("Asia/Kolkata"))));
+        access.setCreatedOn(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(userDto.getZoneId()))));
+        access.setUpdatedOn(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(userDto.getZoneId()))));
+        access.setImage(userDto.getImage());
+        access.setProfileFile(userDto.getProfileFile());
+        access.setFailedAttempts((short)0);
         
         em.persist(user);
         em.persist(access);

@@ -37,6 +37,7 @@ public class UserDto {
     private List<VidhanSabha> vidhanSabhas;
     private String profileFile;
     private byte[] image;
+    private String zoneId;
 
     public String getFirstName() {
         return firstName;
@@ -177,6 +178,15 @@ public class UserDto {
     public void setImage(byte[] image) {
         this.image = image;
     }
+
+    public String getZoneId() {
+        return zoneId;
+    }
+
+    public void setZoneId(String zoneId) {
+        this.zoneId = zoneId;
+    }
+    
     
     
 }

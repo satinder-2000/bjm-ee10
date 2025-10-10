@@ -50,7 +50,7 @@ public class ReferenceDataServiceEjb implements ReferenceDataServiceEjbLocal {
             lokSabhaMap.put(state.getCode(), stateLokSabhas);
             String logStr="Count of LokSabhas for State %s is %d";
             String result=String.format(logStr, state.getCode(), queryLs.getResultList().size());
-            LOGGER.info(result);
+            //LOGGER.info(result);
         }
         vidhanSabhaMap=new HashMap<>();
         for(State state : allStates){
@@ -59,7 +59,7 @@ public class ReferenceDataServiceEjb implements ReferenceDataServiceEjbLocal {
             vidhanSabhaMap.put(state.getCode(), queryVs.getResultList());
             String logStr="Count of VidhanSabhas for State %s is %d";
             String result=String.format(logStr, state.getCode(), queryVs.getResultList().size());
-            LOGGER.info(result);
+            //LOGGER.info(result);
         }
         
         
