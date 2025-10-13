@@ -10,6 +10,7 @@ import java.util.Set;
  */
 public class SurveyDto {
     
+    private int id;
     private String categoryType;
     private String categorySubType;
     @Size(min = 5, max=125)
@@ -18,6 +19,18 @@ public class SurveyDto {
     private Map<String, Set<String>> surveyCategoryMap;
     private Set<String> categoryTypes;
     private Set<String> categorySubTypes;
+    private String createdOn;
+    private String updatedOn;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
 
     public String getCategoryType() {
         return categoryType;
@@ -75,5 +88,22 @@ public class SurveyDto {
         this.categorySubTypes = categorySubTypes;
     }
 
+    public String getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(String createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    public String getUpdatedOn() {
+        return updatedOn;
+    }
+
+    public void setUpdatedOn(String updatedOn) {
+        this.updatedOn = updatedOn;
+    }
+
+    
     
 }

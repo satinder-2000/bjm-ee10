@@ -9,6 +9,10 @@
         <param-value>Development</param-value>
     </context-param>
     <context-param>
+        <param-name>zoneId</param-name>
+        <param-value>Asia/Kolkata</param-value>
+    </context-param>
+    <context-param>
         <param-name>imageSize</param-name>
         <param-value>150</param-value>
     </context-param>

@@ -11,6 +11,7 @@ import java.util.Set;
  */
 public class ForumDto implements Serializable {
     
+    private int id;   
     private String categoryType;
     private String categorySubType;
     @Size(min = 5, max=125)
@@ -19,6 +20,18 @@ public class ForumDto implements Serializable {
     private Map<String, Set<String>> forumCategoryMap;
     private Set<String> categoryTypes;
     private Set<String> categorySubTypes;
+    private String createdOn;
+    private String updatedOn;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
 
     public String getTitle() {
         return title;
@@ -75,6 +88,23 @@ public class ForumDto implements Serializable {
     public void setCategorySubTypes(Set<String> categorySubTypes) {
         this.categorySubTypes = categorySubTypes;
     }
+
+    public String getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(String createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    public String getUpdatedOn() {
+        return updatedOn;
+    }
+
+    public void setUpdatedOn(String updatedOn) {
+        this.updatedOn = updatedOn;
+    }
+    
     
     
 }

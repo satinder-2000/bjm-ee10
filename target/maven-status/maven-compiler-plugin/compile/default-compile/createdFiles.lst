@@ -8,6 +8,7 @@ org/bjm/mbeans/BlogDetailsMBean.class
 org/bjm/entities/Activity.class
 org/bjm/entities/Survey.class
 org/bjm/dtos/ForumDto.class
+org/bjm/dtos/SurveyFromForumDto.class
 org/bjm/entities/BlogComment.class
 org/bjm/utils/BjmConstants.class
 org/bjm/utils/ImageVO.class
@@ -50,6 +51,7 @@ org/bjm/servlets/ForumCommenterImageServlet.class
 org/bjm/mbeans/ContactUsMBean.class
 org/bjm/mbeans/CreateSurveyFromForumMBean.class
 org/bjm/dtos/AccessDto.class
+org/bjm/utils/BjmDateFormatter.class
 org/bjm/utils/CustomViewHandler.class
 org/bjm/entities/VidhanSabhaNominate.class
 org/bjm/mbeans/HomeMBean.class

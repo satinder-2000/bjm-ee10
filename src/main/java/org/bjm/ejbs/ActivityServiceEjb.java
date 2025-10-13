@@ -3,7 +3,6 @@ package org.bjm.ejbs;
 import jakarta.annotation.Resource;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.NamedQuery;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import java.sql.Timestamp;
@@ -25,9 +24,6 @@ public class ActivityServiceEjb implements ActivityServiceEjbLocal {
     @PersistenceContext(name = "bjmPU")
     private EntityManager em;
     
-    @Resource(name = "zoneId")
-    private String zoneId;
-
     @Override
     public List<Activity> getRecentActivities(int size) {
         Query query=em.createNamedQuery("Activity.findLastN", Activity.class);
@@ -37,7 +33,6 @@ public class ActivityServiceEjb implements ActivityServiceEjbLocal {
 
     @Override
     public Activity logNewActivity(Activity activity) {
-        activity.setCreatedOn(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(zoneId))));
         em.persist(activity);
         em.flush();
         LOGGER.info(String.format("New Activity persisted with ID: ", activity.getId()));

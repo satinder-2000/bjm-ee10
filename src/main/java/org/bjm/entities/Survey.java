@@ -18,6 +18,7 @@ import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -72,13 +73,11 @@ public class Survey implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "createdOn")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdOn;
+    private Timestamp createdOn;
     @Basic(optional = false)
     @NotNull
     @Column(name = "updatedOn")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updatedOn;
+    private Timestamp updatedOn;
 
     public Survey() {
     }
@@ -87,7 +86,7 @@ public class Survey implements Serializable {
         this.id = id;
     }
 
-    public Survey(Integer id, String surveyCreatorEmail, String categoryType, String categorySubType, String title, String description, Date createdOn, Date updatedOn) {
+    public Survey(Integer id, String surveyCreatorEmail, String categoryType, String categorySubType, String title, String description, Timestamp createdOn, Timestamp updatedOn) {
         this.id = id;
         this.surveyCreatorEmail = surveyCreatorEmail;
         this.categoryType = categoryType;
@@ -146,19 +145,19 @@ public class Survey implements Serializable {
         this.description = description;
     }
 
-    public Date getCreatedOn() {
+    public Timestamp getCreatedOn() {
         return createdOn;
     }
 
-    public void setCreatedOn(Date createdOn) {
+    public void setCreatedOn(Timestamp createdOn) {
         this.createdOn = createdOn;
     }
 
-    public Date getUpdatedOn() {
+    public Timestamp getUpdatedOn() {
         return updatedOn;
     }
 
-    public void setUpdatedOn(Date updatedOn) {
+    public void setUpdatedOn(Timestamp updatedOn) {
         this.updatedOn = updatedOn;
     }
 

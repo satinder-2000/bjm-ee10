@@ -7,6 +7,9 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.servlet.ServletContext;
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -40,7 +43,8 @@ public class ActivityMBean implements Serializable {
     }
     
     public void addActivity(Activity activity){
-        
+        ServletContext servletContext= (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+        activity.setCreatedOn(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(servletContext.getInitParameter("zoneId")))));
         Activity activityResult=activityServiceEjbLocal.logNewActivity(activity);
         LOGGER.info(String.format("Activity created with ID: %s", activityResult.getId()));
         if (activityList.size()==activityListSize){//accomodate new one at the expense of the oldest record - at the bottom of the List

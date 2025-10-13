@@ -186,7 +186,7 @@ public class ManageAccountMBean implements Serializable {
         user.setMobile(userDto.getMobile());
         user.setPhone(userDto.getPhone());
         ServletContext servletContext=(ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-        user.setUpdatedOn(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(servletContext.getInitParameter("ZoneId")))));
+        user.setUpdatedOn(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(servletContext.getInitParameter("zoneId")))));
         LOGGER.info(String.format("Personal details updated for User ID %d",user.getId()));
         FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_INFO, "Personal details updated successfully","Personal details updated successfully"));
         return null;

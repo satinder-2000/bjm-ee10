@@ -24,7 +24,7 @@ import org.bjm.entities.Activity;
 import org.bjm.entities.ActivityType;
 import org.bjm.entities.Forum;
 import org.bjm.entities.ForumCategory;
-import org.bjm.dtos.ForumDto;
+import org.bjm.dtos.SurveyFromForumDto;
 import org.bjm.ejbs.EmailServiceEjbLocal;
 import org.bjm.ejbs.ReferenceDataServiceEjbLocal;
 import org.bjm.ejbs.UserServiceEjbLocal;
@@ -39,7 +39,7 @@ public class CreateForumMBean implements Serializable {
     
     private static final Logger LOGGER = Logger.getLogger(CreateForumMBean.class.getName());
     
-    private ForumDto forumDto;
+    private SurveyFromForumDto forumDto;
     @Inject
     private ActivityMBean activityMBean;
     @Inject        
@@ -53,7 +53,7 @@ public class CreateForumMBean implements Serializable {
     
     @PostConstruct
     public void init(){
-        forumDto = new ForumDto();
+        forumDto = new SurveyFromForumDto();
         forumDto.setForumCategoryMap(new HashMap<>());
         forumDto.getForumCategoryMap().put("--Select One--", null);
         List<ForumCategory> forumCategoryList =referenceDataServiceEjbLocal.getForumCategories();
@@ -112,7 +112,7 @@ public class CreateForumMBean implements Serializable {
         activityMBean.addActivity(activity);
         //Last Step - send Email
         emailServiceEjbLocal.sendForumCreatedEmail(access, forum);
-        forumDto=new ForumDto();//To erase the previous data as we are working in a session.
+        forumDto=new SurveyFromForumDto();//To erase the previous data as we are working in a session.
     }
     
     public String getReturnValue(){
@@ -120,11 +120,11 @@ public class CreateForumMBean implements Serializable {
         return "/flowreturns/CreateForum-return?faces-redirect=true";
     }
     
-    public ForumDto getForumDto() {
+    public SurveyFromForumDto getForumDto() {
         return forumDto;
     }
 
-    public void setForumDto(ForumDto forumDto) {
+    public void setForumDto(SurveyFromForumDto forumDto) {
         this.forumDto = forumDto;
     }
 
