@@ -42,7 +42,7 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Integer id;
+    private int id;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
@@ -102,11 +102,11 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(Integer id) {
+    public User(int id) {
         this.id = id;
     }
 
-    public User(Integer id, String email, String firstName, String lastName, String gender, char[] dob, String mobile, String stateName, String lokSabhaConstituency, Timestamp createdOn, Timestamp updatedOn,
+    public User(int id, String email, String firstName, String lastName, String gender, char[] dob, String mobile, String stateName, String lokSabhaConstituency, Timestamp createdOn, Timestamp updatedOn,
             String vidhanSabhaConstituency) {
         this.id = id;
         this.email = email;
@@ -228,27 +228,30 @@ public class User implements Serializable {
         this.updatedOn = updatedOn;
     }
 
-    
-
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 7;
+        hash = 73 * hash + this.id;
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof User)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        User other = (User) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        return true;
+        final User other = (User) obj;
+        return this.id == other.id;
     }
+
+    
+
 
     @Override
     public String toString() {

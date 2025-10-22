@@ -38,7 +38,7 @@ public class SurveyFromForumVote implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Integer id;
+    private int id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 1000)
@@ -71,11 +71,11 @@ public class SurveyFromForumVote implements Serializable {
     public SurveyFromForumVote() {
     }
 
-    public SurveyFromForumVote(Integer id) {
+    public SurveyFromForumVote(int id) {
         this.id = id;
     }
 
-    public SurveyFromForumVote(Integer id, String comment, Date dated, int surveyFromForumId, String voteType, int voterAccessId, String voterEmail) {
+    public SurveyFromForumVote(int id, String comment, Date dated, int surveyFromForumId, String voteType, int voterAccessId, String voterEmail) {
         this.id = id;
         this.comment = comment;
         this.dated = dated;
@@ -143,24 +143,27 @@ public class SurveyFromForumVote implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 5;
+        hash = 19 * hash + this.id;
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof SurveyFromForumVote)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        SurveyFromForumVote other = (SurveyFromForumVote) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        return true;
+        final SurveyFromForumVote other = (SurveyFromForumVote) obj;
+        return this.id == other.id;
     }
 
+    
     @Override
     public String toString() {
         return "org.bjm.entities.SurveyFromForumVote[ id=" + id + " ]";

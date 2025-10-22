@@ -40,7 +40,7 @@ public class LokSabhaNominate implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Integer id;
+    private int id;
     @Column(name = "constituency")
     private String constituency;
     @Basic(optional = false)
@@ -68,18 +68,18 @@ public class LokSabhaNominate implements Serializable {
     private int nominationCount;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 2)
+    @Size( min = 2, max = 2)
     @Column(name = "stateCode")
     private String stateCode;
 
     public LokSabhaNominate() {
     }
 
-    public LokSabhaNominate(Integer id) {
+    public LokSabhaNominate(int id) {
         this.id = id;
     }
 
-    public LokSabhaNominate(Integer id, String candidateName, int nominatedByAccessId, String nominatedByEmail, Date nominatedOn, int nominationCount, String stateCode, String constituency) {
+    public LokSabhaNominate(int id, String candidateName, int nominatedByAccessId, String nominatedByEmail, Date nominatedOn, int nominationCount, String stateCode, String constituency) {
         this.id = id;
         this.candidateName = candidateName;
         this.nominatedByAccessId = nominatedByAccessId;
@@ -157,24 +157,16 @@ public class LokSabhaNominate implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    public boolean equals(Object obj) {
+        return super.equals(obj); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof LokSabhaNominate)) {
-            return false;
-        }
-        LokSabhaNominate other = (LokSabhaNominate) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public int hashCode() {
+        return super.hashCode(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
+
+    
 
     @Override
     public String toString() {

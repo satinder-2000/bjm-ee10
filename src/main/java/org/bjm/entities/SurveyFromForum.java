@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.bjm.entities;
 
 import jakarta.persistence.Basic;
@@ -45,7 +41,7 @@ public class SurveyFromForum implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Integer id;
+    private int id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
@@ -87,11 +83,11 @@ public class SurveyFromForum implements Serializable {
     public SurveyFromForum() {
     }
 
-    public SurveyFromForum(Integer id) {
+    public SurveyFromForum(int id) {
         this.id = id;
     }
 
-    public SurveyFromForum(Integer id, String surveyCreatorEmail, String categoryType, String categorySubType, String title, String description, Timestamp createdOn, Timestamp updatedOn, int forumId) {
+    public SurveyFromForum(int id, String surveyCreatorEmail, String categoryType, String categorySubType, String title, String description, Timestamp createdOn, Timestamp updatedOn, int forumId) {
         this.id = id;
         this.surveyCreatorEmail = surveyCreatorEmail;
         this.categoryType = categoryType;
@@ -181,23 +177,27 @@ public class SurveyFromForum implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 7;
+        hash = 37 * hash + this.id;
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof SurveyFromForum)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        SurveyFromForum other = (SurveyFromForum) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        return true;
+        final SurveyFromForum other = (SurveyFromForum) obj;
+        return this.id == other.id;
     }
+
+    
 
     @Override
     public String toString() {

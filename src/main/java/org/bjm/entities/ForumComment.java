@@ -35,7 +35,7 @@ public class ForumComment implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Integer id;
+    private int id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 1000)
@@ -62,11 +62,11 @@ public class ForumComment implements Serializable {
     public ForumComment() {
     }
 
-    public ForumComment(Integer id) {
+    public ForumComment(int id) {
         this.id = id;
     }
 
-    public ForumComment(Integer id, String comment, Timestamp dated, int forumCommenterAccessId, String forumCommenterEmail, int forumId) {
+    public ForumComment(int id, String comment, Timestamp dated, int forumCommenterAccessId, String forumCommenterEmail, int forumId) {
         this.id = id;
         this.comment = comment;
         this.dated = dated;
@@ -75,11 +75,11 @@ public class ForumComment implements Serializable {
         this.forumId = forumId;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -126,24 +126,16 @@ public class ForumComment implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    public boolean equals(Object obj) {
+        return super.equals(obj); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ForumComment)) {
-            return false;
-        }
-        ForumComment other = (ForumComment) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public int hashCode() {
+        return super.hashCode(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
+
+    
 
     @Override
     public String toString() {

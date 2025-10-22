@@ -38,7 +38,7 @@ public class Activity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Integer id;
+    private int id;
     @Basic(optional = false)
     @NotNull
     @Column(name = "createdOn")
@@ -66,7 +66,7 @@ public class Activity implements Serializable {
     public Activity() {
     }
 
-    public Activity(Integer id) {
+    public Activity(int id) {
         this.id = id;
     }
 
@@ -79,11 +79,11 @@ public class Activity implements Serializable {
         this.activityId = activityId;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -129,23 +129,27 @@ public class Activity implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 7;
+        hash = 37 * hash + this.id;
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Activity)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Activity other = (Activity) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        return true;
+        final Activity other = (Activity) obj;
+        return this.id == other.id;
     }
+
+    
 
     @Override
     public String toString() {

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.bjm.entities;
 
 import jakarta.persistence.Basic;
@@ -35,7 +31,7 @@ public class VidhanSabha implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Integer id;
+    private int id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 2)
@@ -50,11 +46,11 @@ public class VidhanSabha implements Serializable {
     public VidhanSabha() {
     }
 
-    public VidhanSabha(Integer id) {
+    public VidhanSabha(int id) {
         this.id = id;
     }
 
-    public VidhanSabha(Integer id, String stateCode, String constituency) {
+    public VidhanSabha(int id, String stateCode, String constituency) {
         this.id = id;
         this.stateCode = stateCode;
         this.constituency = constituency;
@@ -86,23 +82,27 @@ public class VidhanSabha implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 7;
+        hash = 59 * hash + this.id;
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof VidhanSabha)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        VidhanSabha other = (VidhanSabha) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        return true;
+        final VidhanSabha other = (VidhanSabha) obj;
+        return this.id == other.id;
     }
+
+    
 
     @Override
     public String toString() {

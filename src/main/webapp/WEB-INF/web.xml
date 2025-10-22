@@ -49,7 +49,10 @@
         <param-name>mailSMTPHost</param-name>
         <param-value>smtp.livemail.co.uk</param-value>
     </context-param>
-    <context-param>
+    <context-param><context-param>
+        <param-name>zoneId</param-name>
+        <param-value>Asia/Kolkata</param-value>
+    </context-param>
         <param-name>mailSMTPPort</param-name>
         <param-value>587</param-value>
     </context-param>
@@ -74,8 +77,8 @@
         <param-value>createAccess.xhtml?email=%s</param-value>
     </context-param>
     <context-param>
-        <param-name>zoneId</param-name>
-        <param-value>Asia/Kolkata</param-value>
+        <param-name>recordCount</param-name>
+        <param-value>15</param-value>
     </context-param>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>

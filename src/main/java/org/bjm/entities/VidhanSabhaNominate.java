@@ -41,7 +41,7 @@ public class VidhanSabhaNominate implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Integer id;
+    private int id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
@@ -79,11 +79,11 @@ public class VidhanSabhaNominate implements Serializable {
     public VidhanSabhaNominate() {
     }
 
-    public VidhanSabhaNominate(Integer id) {
+    public VidhanSabhaNominate(int id) {
         this.id = id;
     }
 
-    public VidhanSabhaNominate(Integer id, String candidateName, String constituency, int nominatedByAccessId, String nominatedByEmail, Date nominatedOn, int nominationCount, String stateCode) {
+    public VidhanSabhaNominate(int id, String candidateName, String constituency, int nominatedByAccessId, String nominatedByEmail, Date nominatedOn, int nominationCount, String stateCode) {
         this.id = id;
         this.candidateName = candidateName;
         this.constituency = constituency;
@@ -160,23 +160,27 @@ public class VidhanSabhaNominate implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 5;
+        hash = 67 * hash + this.id;
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof VidhanSabhaNominate)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        VidhanSabhaNominate other = (VidhanSabhaNominate) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        return true;
+        final VidhanSabhaNominate other = (VidhanSabhaNominate) obj;
+        return this.id == other.id;
     }
+
+    
 
     @Override
     public String toString() {

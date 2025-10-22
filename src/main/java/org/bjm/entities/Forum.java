@@ -37,7 +37,7 @@ public class Forum implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Integer id;
+    private int id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
@@ -75,11 +75,11 @@ public class Forum implements Serializable {
     public Forum() {
     }
 
-    public Forum(Integer id) {
+    public Forum(int id) {
         this.id = id;
     }
 
-    public Forum(Integer id, String forumCreatorEmail, String categoryType, String categorySubType, String title, String description, Timestamp createdOn, Timestamp updatedOn) {
+    public Forum(int id, String forumCreatorEmail, String categoryType, String categorySubType, String title, String description, Timestamp createdOn, Timestamp updatedOn) {
         this.id = id;
         this.forumCreatorEmail = forumCreatorEmail;
         this.categoryType = categoryType;
@@ -155,24 +155,16 @@ public class Forum implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    public boolean equals(Object obj) {
+        return super.equals(obj); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Forum)) {
-            return false;
-        }
-        Forum other = (Forum) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public int hashCode() {
+        return super.hashCode(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
     }
+
+    
 
     @Override
     public String toString() {

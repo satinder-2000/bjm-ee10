@@ -42,7 +42,7 @@ public class SurveyVote implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Integer id;
+    private int id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 1000)
@@ -75,11 +75,11 @@ public class SurveyVote implements Serializable {
     public SurveyVote() {
     }
 
-    public SurveyVote(Integer id) {
+    public SurveyVote(int id) {
         this.id = id;
     }
 
-    public SurveyVote(Integer id, String comment, Date dated, String voteType, int surveyId, int voterAccessId, String voterEmail) {
+    public SurveyVote(int id, String comment, Date dated, String voteType, int surveyId, int voterAccessId, String voterEmail) {
         this.id = id;
         this.comment = comment;
         this.dated = dated;
@@ -147,23 +147,27 @@ public class SurveyVote implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 7;
+        hash = 89 * hash + this.id;
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof SurveyVote)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        SurveyVote other = (SurveyVote) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        return true;
+        final SurveyVote other = (SurveyVote) obj;
+        return this.id == other.id;
     }
+
+    
 
     @Override
     public String toString() {
