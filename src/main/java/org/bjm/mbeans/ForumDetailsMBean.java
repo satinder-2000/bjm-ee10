@@ -48,7 +48,7 @@ public class ForumDetailsMBean implements Serializable{
     public void init(){
         HttpServletRequest request=(HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String forumIdStr=request.getParameter("forumId");
-        int forumId=Integer.getInteger(forumIdStr);
+        int forumId=Integer.parseInt(forumIdStr);
         forum = forumServiceEjbLocal.findById(forumId);
         LOGGER.info(String.format("Forum with ID: %d Loaded successfully.", forum.getId()));
         
@@ -71,7 +71,7 @@ public class ForumDetailsMBean implements Serializable{
             Access access = (Access) session.getAttribute("access");
             forumComment.setForumCommenterAccessId(access.getId());
             forumComment.setForumCommenterEmail(access.getEmail());
-            forumComment.setDated(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(servletContext.getInitParameter("ZoneId")))));
+            forumComment.setDated(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(servletContext.getInitParameter("zoneId")))));
             forumComment=forumServiceEjbLocal.postForumComment(forumComment);
             LOGGER.info(String.format("New ForumComment added with ID: %d", forumComment.getId()));
             FacesContext.getCurrentInstance().addMessage("usercomment", new FacesMessage(FacesMessage.SEVERITY_INFO, "Comment added successfully!!", "Comment added successfully!!"));
@@ -81,7 +81,7 @@ public class ForumDetailsMBean implements Serializable{
     
     private void loadOtherForumComments(){
         
-        List<ForumComment> otherForumComments=forumServiceEjbLocal.getAllCommentsOnForum(forum.getId());
+        otherForumComments=forumServiceEjbLocal.getAllCommentsOnForum(forum.getId());
         Map<Integer, ImageVO> forumCommenterImageMap=new HashMap<>();
         for(ForumComment fc: otherForumComments){
             Access forumCommenterAccess= userServiceEjbLocal.getAccessById(fc.getForumCommenterAccessId());

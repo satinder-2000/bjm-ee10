@@ -39,7 +39,7 @@ public class ReportAbuseForumMBean implements Serializable{
         forumAbuse=new ForumAbuse();
         HttpServletRequest request=(HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String commentId=request.getParameter("commentId");
-        forumComment = userServiceEjbLocal.findByForumCommentById(Integer.getInteger(commentId));
+        forumComment = userServiceEjbLocal.findByForumCommentById(Integer.parseInt(commentId));
         forumAbuse.setForumCommentId(forumComment.getId());
         HttpSession session=request.getSession();
         Access access=(Access) session.getAttribute("access");
@@ -50,7 +50,7 @@ public class ReportAbuseForumMBean implements Serializable{
     
     public String reportAbuse(){
         ServletContext servletContext=(ServletContext)FacesContext.getCurrentInstance().getExternalContext().getContext();
-        forumAbuse.setReportedOn(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(servletContext.getInitParameter("ZoneId")))));
+        forumAbuse.setReportedOn(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(servletContext.getInitParameter("zoneId")))));
         forumAbuse=userServiceEjbLocal.createForumAbuse(forumAbuse);
         LOGGER.info(String.format("ForumAbuse created with ID: %d", forumAbuse.getId()));
         FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_INFO, "Abuse reported", "Abuse reported"));

@@ -72,7 +72,7 @@ public class CreateBlogMBean implements Serializable {
             Access access = (Access) session.getAttribute("access");
             blog.setPublishedByEmail(access.getEmail());
             blog.setPublishedByAccessId(access.getId());
-            blog.setPublishedOn(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(servletContext.getInitParameter("ZoneId")))));
+            blog.setPublishedOn(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(servletContext.getInitParameter("zoneId")))));
             blog.setSummary(blogDto.getSummary());
             blog=userServiceEjbLocal.createUserBlog(blog);
             LOGGER.info(String.format("Blog created with ID: %d", blog.getId()));
@@ -80,7 +80,7 @@ public class CreateBlogMBean implements Serializable {
                         "Blog initiated successfully!!", "Blog initiated successfully!!"));
         }else{//Just an update if required. This part might be called multiple time
             //We alredy have Blog with and Id i.e. the filter
-            blog.setPublishedOn(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(servletContext.getInitParameter("ZoneId")))));
+            blog.setPublishedOn(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(servletContext.getInitParameter("zoneId")))));
             blog=userServiceEjbLocal.updateUserBlog(blog);
             LOGGER.info(String.format("Blog updated with ID: %d", blog.getId()));
             FacesContext.getCurrentInstance().addMessage("desc", new FacesMessage(FacesMessage.SEVERITY_INFO,
@@ -124,7 +124,7 @@ public class CreateBlogMBean implements Serializable {
         blog.setPublishedByEmail(access.getEmail());
         blog.setPublishedByAccessId(access.getId());
         ServletContext servletContext=(ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-        blog.setPublishedOn(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(servletContext.getInitParameter("ZoneId")))));
+        blog.setPublishedOn(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(servletContext.getInitParameter("zoneId")))));
         blog.setSummary(blogDto.getSummary());
         blog = userServiceEjbLocal.createUserBlog(blog);
         LOGGER.info(String.format("Blog created with ID: %d",blog.getId()));
@@ -134,7 +134,7 @@ public class CreateBlogMBean implements Serializable {
         activity.setActivityId(blog.getId());
         activity.setDescription("Blog Created "+blog.getTitle());
         activity.setOwnerEmail(access.getEmail());
-        activity.setCreatedOn(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(servletContext.getInitParameter("ZoneId")))));
+        activity.setCreatedOn(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(servletContext.getInitParameter("zoneId")))));
         activityMBean.addActivity(activity);
         //Last Step - send Email
         emailServiceEjbLocal.sendBlogCreatedEmail(access, blog);

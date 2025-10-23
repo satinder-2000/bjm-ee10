@@ -32,7 +32,7 @@ public class BlogSummaryMBean implements Serializable{
     @PostConstruct
     public void init(){
         ServletContext servletContext=(ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-        int recordCount=Integer.getInteger(servletContext.getInitParameter("recordCount"));
+        int recordCount=Integer.parseInt(servletContext.getInitParameter("recordCount"));
         allBlogs=blogServiceEjbLocal.findRecentNBlogs(recordCount);
         LOGGER.info(String.format("Count of Blogs loaded : %d", allBlogs.size()));
     }

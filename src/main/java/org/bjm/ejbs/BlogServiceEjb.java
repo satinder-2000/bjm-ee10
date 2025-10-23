@@ -42,7 +42,6 @@ public class BlogServiceEjb implements BlogServiceEjbLocal {
     @Override
     public List<Blog> findRecentNBlogs(int count) {
         Query query=em.createNamedQuery("Blog.findNBlogs", Blog.class);
-        query.setParameter("limit", count);
         query.setMaxResults(count);
         List<Blog> toReturn=query.getResultList();
         LOGGER.info(String.format("Count of Blogs for extracted is %d", toReturn.size()));

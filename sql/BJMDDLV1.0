@@ -69,7 +69,7 @@ CREATE TABLE `BlogComment` (
 -- bjm.Forum definition
 
 CREATE TABLE `Forum` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `forumCreatorEmail` varchar(100) NOT NULL,
   `categoryType` varchar(100) NOT NULL,
   `categorySubType` varchar(100) NOT NULL,
@@ -97,11 +97,11 @@ CREATE TABLE `ForumAbuse` (
 -- bjm.ForumCategory definition
 
 CREATE TABLE `ForumCategory` (
-  `int` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(100) NOT NULL,
   `subType` varchar(100) NOT NULL,
   `description` varchar(150) DEFAULT NULL,
-  PRIMARY KEY (`int`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
@@ -131,7 +131,7 @@ CREATE TABLE `LokSabha` (
 -- bjm.LokSabhaNominate definition
 
 CREATE TABLE `LokSabhaNominate` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `constituency` varchar(100) NOT NULL,
   `candidateName` varchar(100) NOT NULL,
   `nominatedByAccessId` int(11) NOT NULL,

@@ -46,7 +46,7 @@ public class PieChartServletSFF extends HttpServlet {
             throws ServletException, IOException {
         String surveyFromForumIdStr=request.getParameter("surveyFromForumId");
         int dia=Integer.parseInt(request.getParameter("dia"));
-        Integer surveyFromForumId=Integer.getInteger(surveyFromForumIdStr);
+        Integer surveyFromForumId=Integer.parseInt(surveyFromForumIdStr);
         List<SurveyFromForumVote> surveyFromForumVoteList=surveyFromForumServiceEjbLocal.getAllVotesOnSurveyFromForum(surveyFromForumId);
         int agreeCt=0;
         int disagreeCt=0;

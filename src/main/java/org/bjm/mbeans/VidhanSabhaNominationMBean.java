@@ -190,7 +190,7 @@ public class VidhanSabhaNominationMBean implements Serializable{
         vidhanSabhaNominate.setNominatedByEmail(access.getEmail());
         vidhanSabhaNominate.setNominationCount(1);
         ServletContext servletContext=(ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-        vidhanSabhaNominate.setNominatedOn(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(servletContext.getInitParameter("ZoneId")))));
+        vidhanSabhaNominate.setNominatedOn(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(servletContext.getInitParameter("zoneId")))));
         newNomination=true; //Will need this flag during submit.
     }
     

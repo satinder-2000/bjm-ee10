@@ -32,7 +32,7 @@ public class ForumCommenterImageServlet extends HttpServlet {
         HttpSession session=request.getSession();
         Map<Integer, ImageVO> forumCommenterImageMap=(Map) session.getAttribute(BjmConstants.FORUM_COMMENTER_IMAGE_MAP);
         String forumCommenterIdStr=request.getParameter("forumCommenterId");
-        Integer forumCommenterId=Integer.getInteger(forumCommenterIdStr);
+        Integer forumCommenterId=Integer.parseInt(forumCommenterIdStr);
         ImageVO forumCommenterImageVO=forumCommenterImageMap.get(forumCommenterId);
         response.setContentType("image/"+forumCommenterImageVO.getImgType());
         response.getOutputStream().write(forumCommenterImageVO.getImage());

@@ -32,7 +32,7 @@ public class BlogCommenterImageServlet extends HttpServlet {
         HttpSession session=request.getSession();
         Map<Integer, ImageVO> blogCommenterImageMap=(Map<Integer, ImageVO>) session.getAttribute(BjmConstants.BLOG_COMMENTER_IMAGE_MAP);
         String blogCommenterId=request.getParameter("blogCommenterId");
-        int blogCommenterIdObj=Integer.getInteger(blogCommenterId);
+        int blogCommenterIdObj=Integer.parseInt(blogCommenterId);
         ImageVO blogCommenterImageVO=blogCommenterImageMap.get(blogCommenterIdObj);
         response.setContentType("image/"+blogCommenterImageVO.getImgType());
         response.getOutputStream().write(blogCommenterImageVO.getImage());

@@ -38,9 +38,8 @@ public class SurveyServiceEjb implements SurveyServiceEjbLocal {
 
     @Override
     public List<SurveyVote> getAllVotesOnSurvey(int surveyId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Query query=em.createNamedQuery("SurveyVote.findBySurveyId", SurveyVote.class);
+        query.setParameter("surveyId", surveyId);
+        return query.getResultList();
     }
-
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
 }

@@ -41,7 +41,7 @@ public class ReportAbuseSurveyMBean implements Serializable {
         surveyAbuse=new SurveyAbuse();
         HttpServletRequest request=(HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String voteId=request.getParameter("voteId");
-        surveyVote=userServiceEjbLocal.findBySurveyVoteById(Integer.getInteger(voteId));
+        surveyVote=userServiceEjbLocal.findBySurveyVoteById(Integer.parseInt(voteId));
         surveyAbuse.setSurveyVoteId(surveyVote.getId());
         HttpSession session=request.getSession();
         Access access=(Access) session.getAttribute("access");
@@ -52,7 +52,7 @@ public class ReportAbuseSurveyMBean implements Serializable {
     
     public String reportAbuse(){
         ServletContext servletContext=(ServletContext)FacesContext.getCurrentInstance().getExternalContext().getContext();
-        surveyAbuse.setReportedOn(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(servletContext.getInitParameter("ZoneId")))));
+        surveyAbuse.setReportedOn(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(servletContext.getInitParameter("zoneId")))));
         surveyAbuse=userServiceEjbLocal.createSurveyAbuse(surveyAbuse);
         LOGGER.info(String.format("SurveyAbuse created with ID: %d", surveyAbuse.getId()));
         FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_INFO, "Abuse reported", "Abuse reported"));

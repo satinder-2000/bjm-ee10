@@ -40,7 +40,7 @@ public class ReportAbuseSurveyFromForumMBean implements Serializable {
         surveyFromForumAbuse=new SurveyFromForumAbuse();
         HttpServletRequest request=(HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String voteId=request.getParameter("voteId");
-        surveyFromForumVote=userServiceEjbLocal.findBySurveyFromForumVoteById(Integer.getInteger(voteId));
+        surveyFromForumVote=userServiceEjbLocal.findBySurveyFromForumVoteById(Integer.parseInt(voteId));
         surveyFromForumAbuse.setSurveyFromForumVoteId(surveyFromForumVote.getId());
         HttpSession session=request.getSession();
         Access access=(Access) session.getAttribute("access");
@@ -51,7 +51,7 @@ public class ReportAbuseSurveyFromForumMBean implements Serializable {
     
     public String reportAbuse(){
         ServletContext servletContext=(ServletContext)FacesContext.getCurrentInstance().getExternalContext().getContext();
-        surveyFromForumAbuse.setReportedOn(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(servletContext.getInitParameter("ZoneId")))));
+        surveyFromForumAbuse.setReportedOn(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(servletContext.getInitParameter("zoneId")))));
         surveyFromForumAbuse=userServiceEjbLocal.createSurveyFromForumAbuse(surveyFromForumAbuse);
         LOGGER.info(String.format("surveyFromForumAbuse created with ID: %d", surveyFromForumAbuse.getId()));
         FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_INFO, "Abuse reported", "Abuse reported"));

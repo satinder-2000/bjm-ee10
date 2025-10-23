@@ -191,7 +191,7 @@ public class LokSabhaNominationMBean implements Serializable {
         lokSabhaNominate.setNominatedByEmail(access.getEmail());
         lokSabhaNominate.setNominationCount(1);
         ServletContext servletContext=(ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-        lokSabhaNominate.setNominatedOn(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(servletContext.getInitParameter("ZoneId")))));
+        lokSabhaNominate.setNominatedOn(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(servletContext.getInitParameter("zoneId")))));
         newNomination=true; //Will need this flag during submit.
     }
     

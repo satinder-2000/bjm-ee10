@@ -44,7 +44,7 @@ public class CreateSurveyFromForumMBean implements Serializable {
     public void init(){
         HttpServletRequest request=(HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String forumId=request.getParameter("forumId");
-        forum = userServiceEjbLocal.getUserForum(Integer.getInteger(forumId));
+        forum = userServiceEjbLocal.getUserForum(Integer.parseInt(forumId));
         surveyFromForum=new SurveyFromForum();
         surveyFromForum.setCategoryType(forum.getCategoryType());
         surveyFromForum.setCategorySubType(forum.getCategorySubType());

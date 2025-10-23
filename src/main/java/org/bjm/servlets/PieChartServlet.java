@@ -46,12 +46,12 @@ public class PieChartServlet extends HttpServlet {
             throws ServletException, IOException {
         String surveyIdStr=request.getParameter("surveyId");
         int dia=Integer.parseInt(request.getParameter("dia"));
-        Integer surveyId=Integer.getInteger(surveyIdStr);
+        Integer surveyId=Integer.parseInt(surveyIdStr);
         List<SurveyVote> surveyVoteList=surveyServiceEjbLocal.getAllVotesOnSurvey(surveyId);
         int agreeCt=0;
         int disagreeCt=0;
         int undecidedCt=0;
-        if(!surveyVoteList.isEmpty()){
+        if(surveyVoteList.isEmpty()){
             String text="No Vote yet";
             int diaE=Double.valueOf(dia*.5).intValue();
             BufferedImage bufferedImage=ImageUtil.drawEmptyPieChart(diaE, text, diaE);

@@ -39,7 +39,7 @@ public class ForumServiceEjb implements ForumServiceEjbLocal {
 
     @Override
     public List<ForumComment> getAllCommentsOnForum(int forumId) {
-        Query query = em.createNamedQuery("ForumComment.findAllForForum", ForumComment.class);
+        Query query = em.createNamedQuery("ForumComment.findByForumId", ForumComment.class);
         query.setParameter("forumId", forumId);
         List<ForumComment> toReturn =query.getResultList();
         LOGGER.info(String.format("Count of ForumComment on Forum Id %d is %d", forumId, toReturn.size()));

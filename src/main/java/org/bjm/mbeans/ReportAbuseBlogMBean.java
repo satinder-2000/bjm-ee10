@@ -40,7 +40,7 @@ public class ReportAbuseBlogMBean implements Serializable {
         blogAbuse=new BlogAbuse();
         HttpServletRequest request=(HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String commentId=request.getParameter("commentId");
-        blogComment=userServiceEjbLocal.findByBlogCommentById(Integer.getInteger(commentId));
+        blogComment=userServiceEjbLocal.findByBlogCommentById(Integer.parseInt(commentId));
         blogAbuse.setBlogCommentId(blogComment.getId());
         HttpSession session=request.getSession();
         Access access=(Access) session.getAttribute("access");
@@ -52,7 +52,7 @@ public class ReportAbuseBlogMBean implements Serializable {
     
     public String reportAbuse(){
         ServletContext servletContext=(ServletContext)FacesContext.getCurrentInstance().getExternalContext().getContext();
-        blogAbuse.setReportedOn(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(servletContext.getInitParameter("ZoneId")))));
+        blogAbuse.setReportedOn(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(servletContext.getInitParameter("zoneId")))));
         blogAbuse=userServiceEjbLocal.createBlogAbuse(blogAbuse);
         LOGGER.info(String.format("BlogAbuse created with ID: %d", blogAbuse.getId()));
         FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_INFO, "Abuse reported", "Abuse reported"));

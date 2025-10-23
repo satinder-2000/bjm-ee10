@@ -56,7 +56,7 @@ public class BlogDetailsMBean implements Serializable {
     public void init(){
         HttpServletRequest request=(HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String blogIdStr=request.getParameter("blogId");
-        int blogId=Integer.getInteger(blogIdStr);
+        int blogId=Integer.parseInt(blogIdStr);
         blog = blogServiceEjbLocal.findByBlogId(blogId);
         blogComment=new BlogComment();
     }
@@ -68,7 +68,7 @@ public class BlogDetailsMBean implements Serializable {
         blogComment.setBlogCommenterAccessId(access.getId());
         blogComment.setBlogCommenterEmail(access.getEmail());
         ServletContext servletContext=(ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-        blogComment.setDated(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(servletContext.getInitParameter("ZoneId")))));
+        blogComment.setDated(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(servletContext.getInitParameter("zoneId")))));
         blogComment.setBlogId(blog.getId());
         blogComment = blogServiceEjbLocal.postBlogComment(blogComment);
         LOGGER.info(String.format("BlogComment created with ID: %d", blogComment.getId()));

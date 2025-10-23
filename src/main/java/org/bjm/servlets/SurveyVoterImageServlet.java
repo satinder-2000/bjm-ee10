@@ -32,7 +32,7 @@ public class SurveyVoterImageServlet extends HttpServlet {
         HttpSession session=request.getSession();
         Map<Integer, ImageVO> surveyVotersImageMap=(Map) session.getAttribute(BjmConstants.SURVEY_VOTER_IMAGE_MAP);
         String surveyVoterIdStr=request.getParameter("surveyVoterId");
-        Integer surveyVoterId=Integer.getInteger(surveyVoterIdStr);
+        Integer surveyVoterId=Integer.parseInt(surveyVoterIdStr);
         ImageVO surveyVoterImageVO=surveyVotersImageMap.get(surveyVoterId);
         response.setContentType("image/"+surveyVoterImageVO.getImgType());
         response.getOutputStream().write(surveyVoterImageVO.getImage());

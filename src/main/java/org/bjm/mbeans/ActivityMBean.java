@@ -38,7 +38,7 @@ public class ActivityMBean implements Serializable {
         //ServletContext servletContext=(ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
         String activityListSizeStr=FacesContext.getCurrentInstance().getExternalContext().getInitParameter("activityListSize");
         activityListSize=Integer.parseInt(activityListSizeStr);
-        //activityListSize=Integer.getInteger(servletContext.getInitParameter("activityListSize"));
+        //activityListSize=Integer.parseInt(servletContext.getInitParameter("activityListSize"));
         activityList=activityServiceEjbLocal.getRecentActivities(activityListSize);
     }
     
