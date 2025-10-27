@@ -78,8 +78,8 @@ public class VidhanSabhaNominationMBean implements Serializable{
         //Fetch User from the email in Access
         user = userServiceEjbLocal.getUserByEmail(access.getEmail());
         state=referenceDataServiceEjbLocal.findStateByName(user.getStateName());
-        List<VidhanSabha> vidhanSabhasInState=referenceDataServiceEjbLocal.getVidhanSabhasForState(state.getCode());
-        List<VidhanSabhaNominate> vidhanSabhaNominations=referenceDataServiceEjbLocal.getVidhanSabhaNominationsForConstituency(state.getCode(), user.getVidhanSabhaConstituency());
+        List<VidhanSabha> vidhanSabhasInState=referenceDataServiceEjbLocal.getVidhanSabhasForState(state.getCode().toString());
+        List<VidhanSabhaNominate> vidhanSabhaNominations=referenceDataServiceEjbLocal.getVidhanSabhaNominationsForConstituency(state.getCode().toString(), user.getVidhanSabhaConstituency());
         nominatedCandidates=new ArrayList();
         if(vidhanSabhaNominations.isEmpty()){
             nominatedCandidates.add("No nomination found");
@@ -180,7 +180,7 @@ public class VidhanSabhaNominationMBean implements Serializable{
     
     private void preSubmitNomination(){
         vidhanSabhaNominate = new VidhanSabhaNominate();
-        vidhanSabhaNominate.setStateCode(user.getStateName());
+        vidhanSabhaNominate.setStateCode(user.getStateCode());
         vidhanSabhaNominate.setConstituency(user.getVidhanSabhaConstituency());
         vidhanSabhaNominate.setCandidateName(candidateNew);
         HttpServletRequest request=(HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
@@ -199,7 +199,7 @@ public class VidhanSabhaNominationMBean implements Serializable{
         for(String nc: nominatedCandidates){
             if (nc.equals(candidateSelected)){
                 //perform the nomination increment here
-                VidhanSabhaNominate vsn = referenceDataServiceEjbLocal.findByVSNominatedCandidate(state.getCode(), candidateSelected);
+                VidhanSabhaNominate vsn = referenceDataServiceEjbLocal.findByVSNominatedCandidate(state.getCode().toString(), candidateSelected);
                 vsn.setNominationCount(vsn.getNominationCount()+1);
             }
         }

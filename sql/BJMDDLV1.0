@@ -122,7 +122,7 @@ CREATE TABLE `ForumComment` (
 
 CREATE TABLE `LokSabha` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `stateCode` char(2) NOT NULL,
+  `stateCode` varchar(2) NOT NULL,
   `constituency` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -138,16 +138,16 @@ CREATE TABLE `LokSabhaNominate` (
   `nominatedByEmail` varchar(100) NOT NULL,
   `nominatedOn` timestamp NOT NULL,
   `nominationCount` int(11) NOT NULL,
-  `stateCode` char(2) NOT NULL,
+  `stateCode` varchar(2) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
 -- bjm.State definition
 
-CREATE TABLE `State` (
-  `id` int(11) NOT NULL,
-  `code` char(2) NOT NULL,
+CREATE TABLE State (
+  `id` int(11) NOT NULL  AUTO_INCREMENT,
+  `code` varchar(2) NOT NULL,
   `name` varchar(100) NOT NULL,
   `postCodePrefix` char(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -261,6 +261,7 @@ CREATE TABLE `User` (
   `dob` char(10) NOT NULL,
   `mobile` varchar(15) NOT NULL,
   `phone` varchar(15) DEFAULT NULL,
+  `stateCode` varchar(2) NOT NULL,
   `stateName` varchar(100) NOT NULL,
   `lokSabhaConstituency` varchar(100) NOT NULL,
   `vidhanSabhaConstituency` varchar(100) DEFAULT NULL,
@@ -273,8 +274,8 @@ CREATE TABLE `User` (
 -- bjm.VidhanSabha definition
 
 CREATE TABLE `VidhanSabha` (
-  `id` int(11) NOT NULL,
-  `stateCode` char(2) NOT NULL,
+  `id` int(11) NOT NULL  AUTO_INCREMENT,
+  `stateCode` varchar(2) NOT NULL,
   `constituency` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -290,6 +291,6 @@ CREATE TABLE `VidhanSabhaNominate` (
   `nominatedByEmail` varchar(100) DEFAULT NULL,
   `nominatedOn` timestamp NOT NULL,
   `nominationCount` int(11) NOT NULL,
-  `stateCode` char(2) NOT NULL,
+  `stateCode` varchar(2) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

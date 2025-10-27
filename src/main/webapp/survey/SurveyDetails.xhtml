@@ -94,7 +94,7 @@
                         <c:when test="#{session.getAttribute('access')!=null}">
                             <div class="w3-card w3-round w3-white">
                                 <div class="w3-container w3-padding">
-                                    <h:form>
+                                    <h:form id="postYourVote">
                                         <h:messages infoStyle="color:blue;" errorStyle="color:red;" />
                                         <div class="w3-row-padding" style="margin:0 -16px">
                                             <div class="w3-quarter">
@@ -166,7 +166,8 @@
                             <br/>
                             <div class="w3-card w3-round w3-white">
                                 <div class="w3-container w3-padding">
-                                    <h:form>
+                                    <h:form id="otherMsgForm">
+                                        <h:messages infoStyle="color:blue;" errorStyle="color:red;" />
                                         <div class="w3-row-padding" style="margin:0 -16px">
                                             <div class="w3-third">
                                                 <h:outputText value="&#160;"/> 

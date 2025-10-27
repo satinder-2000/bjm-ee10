@@ -128,24 +128,25 @@ public class ManageAccountMBean implements Serializable {
             }
         }
         //Change LokSabhas for the newly selected State now
-        List<LokSabha> lokSabhasForState = referenceDataServiceEjbLocal.getLokSabhasForState(userDto.getStateCode());
+        List<LokSabha> lokSabhasForState = referenceDataServiceEjbLocal.getLokSabhasForState(userDto.getStateCode().toString());
         LokSabha dummy = new LokSabha();
         dummy.setStateCode("--");
         dummy.setConstituency("--Select One--");
         userDto.setLokSabhas(new ArrayList());
         userDto.getLokSabhas().add(dummy);
         userDto.getLokSabhas().addAll(lokSabhasForState);
-        LOGGER.info(String.format("UserDto initialided with LokSabha count %d for StateCode : %s", userDto.getLokSabhas().size(),userDto.getStateCode()));
+        LOGGER.info(String.format("UserDto initialided with LokSabha count %d for StateCode : %s", userDto.getLokSabhas().size(),userDto.getStateCode().toString()));
         
         //Change VidhanSabhas for the newly selected State now
-        List<VidhanSabha> vidhanSabhasForState = referenceDataServiceEjbLocal.getVidhanSabhasForState(userDto.getStateCode());
+        List<VidhanSabha> vidhanSabhasForState = referenceDataServiceEjbLocal.getVidhanSabhasForState(userDto.getStateCode().toString());
         userDto.setVidhanSabhas(new ArrayList());
         if(vidhanSabhasForState.isEmpty()){//Case for UTs such as Chandigarh
             VidhanSabha dummyVS = new VidhanSabha();
-            dummyVS.setStateCode("NA");
+            dummyVS.setStateCode("--");
+            String toString = toString();
             dummyVS.setConstituency("No Vidhan Sabha");
             userDto.getVidhanSabhas().add(dummyVS);
-            LOGGER.info(String.format("UserDto initialided without any Vidhan Sabha for StateCode : %s", userDto.getStateCode()));
+            LOGGER.info(String.format("UserDto initialided without any Vidhan Sabha for StateCode : %s", userDto.getStateCode().toString()));
         }else{
             VidhanSabha dummyVS = new VidhanSabha();
             dummyVS.setStateCode("--");

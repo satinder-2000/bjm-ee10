@@ -1,10 +1,12 @@
 org/bjm/entities/BlogAbuse.class
+org/bjm/mbeans/ForumsByUserMBean.class
 org/bjm/ejbs/BlogServiceEjb.class
 org/bjm/ejbs/ForumServiceEjbLocal.class
 org/bjm/ejbs/EmailServiceEjb.class
 org/bjm/mbeans/UserSurveysFromForumsMBean.class
 org/bjm/entities/VidhanSabha.class
 org/bjm/mbeans/BlogDetailsMBean.class
+org/bjm/mbeans/SurveyFromForumDetailsMBean.class
 org/bjm/entities/Survey.class
 org/bjm/entities/Activity.class
 org/bjm/dtos/ForumDto.class

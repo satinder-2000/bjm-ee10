@@ -9,6 +9,11 @@
             <ejb-name>EmailServiceEjb</ejb-name>
             <ejb-class>org.bjm.ejbs.EmailServiceEjb</ejb-class>
             <env-entry>
+                <env-entry-name>domainNameAdmin</env-entry-name>
+                <env-entry-type>java.lang.String</env-entry-type>
+                <env-entry-value>www.bjmanch.org Admin</env-entry-value>
+            </env-entry>
+            <env-entry>
                 <env-entry-name>mailSMTPHost</env-entry-name>
                 <env-entry-type>java.lang.String</env-entry-type>
                 <env-entry-value>smtp.livemail.co.uk</env-entry-value>

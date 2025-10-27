@@ -80,8 +80,8 @@ public class LokSabhaNominationMBean implements Serializable {
         //Fetch User from the email in Access
         user = userServiceEjbLocal.getUserByEmail(access.getEmail());
         state=referenceDataServiceEjbLocal.findStateByName(user.getStateName());
-        List<LokSabha> lokSabhasInState=referenceDataServiceEjbLocal.getLokSabhasForState(state.getCode());
-        List<LokSabhaNominate> lokSabhaNominations=referenceDataServiceEjbLocal.getLokSabhaNominationsForConstituency(state.getCode(), user.getLokSabhaConstituency());
+        List<LokSabha> lokSabhasInState=referenceDataServiceEjbLocal.getLokSabhasForState(state.getCode().toString());
+        List<LokSabhaNominate> lokSabhaNominations=referenceDataServiceEjbLocal.getLokSabhaNominationsForConstituency(state.getCode().toString(), user.getLokSabhaConstituency());
         nominatedCandidates=new ArrayList();
         if(lokSabhaNominations.isEmpty()){
             nominatedCandidates.add("No nomination found");
@@ -181,7 +181,7 @@ public class LokSabhaNominationMBean implements Serializable {
     
     private void preSubmitNomination(){
         lokSabhaNominate = new LokSabhaNominate();
-        lokSabhaNominate.setStateCode(user.getStateName());
+        lokSabhaNominate.setStateCode(user.getStateCode());
         lokSabhaNominate.setConstituency(user.getLokSabhaConstituency());
         lokSabhaNominate.setCandidateName(candidateNew);
         HttpServletRequest request=(HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
@@ -200,7 +200,7 @@ public class LokSabhaNominationMBean implements Serializable {
         for(String nc: nominatedCandidates){
             if (nc.equals(candidateSelected)){
                 //perform the nomination increment here
-                LokSabhaNominate lsn = referenceDataServiceEjbLocal.findByLSNominatedCandidate(state.getCode(), candidateSelected);
+                LokSabhaNominate lsn = referenceDataServiceEjbLocal.findByLSNominatedCandidate(state.getCode().toString(), candidateSelected);
                 lsn.setNominationCount(lsn.getNominationCount()+1);
             }
         }

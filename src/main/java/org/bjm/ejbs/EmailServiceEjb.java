@@ -37,6 +37,9 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
     //@Resource(mappedName = "mail/bjm")//Payara
     private Session session;
     
+    @Resource(name = "domainNameAdmin")
+    private String domainNameAdmin;
+    
     @Resource(name = "webURI")
     private String webURI;
     
@@ -99,7 +102,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
                     .append(webURI).append(createAccess)
                     .append("</a>");
 
-            htmlMsg.append("<p>Best Wishes, <br/>www.bjmanch.org Admin</p>");
+            htmlMsg.append("<p>Best Wishes, <br/>").append(domainNameAdmin).append("</p>");
             htmlMsg.append("</body></html>");
             MimeBodyPart htmlPart = new MimeBodyPart();
             Multipart multipart = new MimeMultipart();
@@ -126,7 +129,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
         htmlMsg.append("<a href=\"").append(webURI).append("\">")
                 .append(webURI)
                 .append("</a>");
-        htmlMsg.append("<p>Best Wishes, <br/>www.bjmanch.org Admin</p>");
+        htmlMsg.append("<p>Best Wishes, <br/>").append(domainNameAdmin).append("</p>");
         htmlMsg.append("</body></html>");
         MimeBodyPart htmlPart = new MimeBodyPart();
         try{
@@ -156,7 +159,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
                 .append(webURI).append(forumCreated)
                 .append("</a>");
         //htmlMsg.append("<p>"+accessCreate+"</p>");
-        htmlMsg.append("<p>Best Wishes, <br/>www.bjmanch.org Admin</p>");
+        htmlMsg.append("<p>Best Wishes, <br/>").append(domainNameAdmin).append("</p>");
         htmlMsg.append("</body></html>");
         MimeBodyPart htmlPart = new MimeBodyPart();
         try {
@@ -186,7 +189,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
                 .append(webURI).append(surveyCreated)
                 .append("</a>");
         //htmlMsg.append("<p>"+accessCreate+"</p>");
-        htmlMsg.append("<p>Best Wishes, <br/>www.bjmanch.in Admin</p>");
+        htmlMsg.append("<p>Best Wishes, <br/>").append(domainNameAdmin).append("</p>");
         htmlMsg.append("</body></html>");
         MimeBodyPart htmlPart = new MimeBodyPart();
         try {
@@ -216,7 +219,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
                 .append(webURI).append(surveyCreated)
                 .append("</a>");
         //htmlMsg.append("<p>"+accessCreate+"</p>");
-        htmlMsg.append("<p>Best Wishes, <br/>www.bjmanch.in Admin</p>");
+        htmlMsg.append("<p>Best Wishes, <br/>").append(domainNameAdmin).append("</p>");
         htmlMsg.append("</body></html>");
         MimeBodyPart htmlPart = new MimeBodyPart();
         try {
@@ -240,7 +243,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
         StringBuilder htmlMsg = new StringBuilder("<html><body>");
         htmlMsg.append("<h2>Dear, ").append(access.getEmail()).append("</h2>");
         htmlMsg.append("<p>You have successfully changed your password.");
-        htmlMsg.append("<p>Best Wishes, <br/>www.bjmanch.in Admin</p>");
+        htmlMsg.append("<p>Best Wishes, <br/>").append(domainNameAdmin).append("</p>");
         htmlMsg.append("</body></html>");
         MimeBodyPart htmlPart = new MimeBodyPart();
         try {
@@ -264,7 +267,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
         StringBuilder htmlMsg = new StringBuilder("<html><body>");
         htmlMsg.append("<h2>Dear, ").append(user.getEmail()).append("</h2>");
         htmlMsg.append("<p>You have successfully changed your State to ").append(user.getStateName()).append(".</p>");
-        htmlMsg.append("<p>Best Wishes, <br/>www.bjmanch.org Admin</p>");
+        htmlMsg.append("<p>Best Wishes, <br/>").append(domainNameAdmin).append("</p>");
         htmlMsg.append("</body></html>");
         MimeBodyPart htmlPart = new MimeBodyPart();
         try {
@@ -288,7 +291,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
         StringBuilder htmlMsg = new StringBuilder("<html><body>");
         htmlMsg.append("<h2>Dear, ").append(user.getEmail()).append("</h2>");
         htmlMsg.append("<p>You have successfully changed your Peronal Details.").append(".</p>");
-        htmlMsg.append("<p>Best Wishes, <br/>www.bjmanch.org Admin</p>");
+        htmlMsg.append("<p>Best Wishes, <br/>").append(domainNameAdmin).append("</p>");
         htmlMsg.append("</body></html>");
         MimeBodyPart htmlPart = new MimeBodyPart();
         try {
@@ -312,7 +315,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
         StringBuilder htmlMsg = new StringBuilder("<html><body>");
         htmlMsg.append("<h2>Dear, ").append(access.getEmail()).append("</h2>");
         htmlMsg.append("<p>You have successfully published a new Blog ").append(blog.getTitle());
-        htmlMsg.append("<p>Best Wishes, <br/>www.bjmanch.in Admin</p>");
+        htmlMsg.append("<p>Best Wishes, <br/>").append(domainNameAdmin).append("</p>");
         htmlMsg.append("</body></html>");
         MimeBodyPart htmlPart = new MimeBodyPart();
         try {
@@ -337,7 +340,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
         htmlMsg.append("<h2>Dear, ").append(adminEmail).append("</h2>");
         htmlMsg.append("<p>Please address the following feedback from ").append(userEmail).append(" on urgent basis.");
         htmlMsg.append("<br/><p>").append(message).append("</p><br/>");
-        htmlMsg.append("<p>Best Wishes, <br/>www.bjmanch.org Admin</p>");
+        htmlMsg.append("<p>Best Wishes, <br/>").append(domainNameAdmin).append("</p>");
         htmlMsg.append("</body></html>");
         MimeBodyPart htmlPart = new MimeBodyPart();
         try {
@@ -362,7 +365,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
         StringBuilder htmlMsg = new StringBuilder("<html><body>");
         htmlMsg.append("<h2>Dear, ").append(user.getEmail()).append("</h2>");
         htmlMsg.append("<p>You have successfully nominated new Candidate ").append(lokSabhaNominate.getCandidateName()).append(" for your Constituency ").append(user.getLokSabhaConstituency());
-        htmlMsg.append("<p>Best Wishes, <br/>www.bjmanch.in Admin</p>");
+        htmlMsg.append("<p>Best Wishes, <br/>").append(domainNameAdmin).append("</p>");
         htmlMsg.append("</body></html>");
         MimeBodyPart htmlPart = new MimeBodyPart();
         try {
@@ -386,7 +389,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
         StringBuilder htmlMsg = new StringBuilder("<html><body>");
         htmlMsg.append("<h2>Dear, ").append(user.getEmail()).append("</h2>");
         htmlMsg.append("<p>You have successfully nominated Candidate ").append(lokSabhaNominate.getCandidateName()).append(" for your Constituency ").append(user.getLokSabhaConstituency());
-        htmlMsg.append("<p>Best Wishes, <br/>www.bjmanch.in Admin</p>");
+        htmlMsg.append("<p>Best Wishes, <br/>").append(domainNameAdmin).append("</p>");
         htmlMsg.append("</body></html>");
         MimeBodyPart htmlPart = new MimeBodyPart();
         try {
@@ -410,7 +413,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
         StringBuilder htmlMsg = new StringBuilder("<html><body>");
         htmlMsg.append("<h2>Dear, ").append(user.getEmail()).append("</h2>");
         htmlMsg.append("<p>You have successfully nominated new Candidate ").append(vidhanSabhaNominate.getCandidateName()).append(" for your Constituency ").append(user.getVidhanSabhaConstituency());
-        htmlMsg.append("<p>Best Wishes, <br/>www.bjmanch.in Admin</p>");
+        htmlMsg.append("<p>Best Wishes, <br/>").append(domainNameAdmin).append("</p>");
         htmlMsg.append("</body></html>");
         MimeBodyPart htmlPart = new MimeBodyPart();
         try {
@@ -434,7 +437,7 @@ public class EmailServiceEjb implements EmailServiceEjbLocal {
         StringBuilder htmlMsg = new StringBuilder("<html><body>");
         htmlMsg.append("<h2>Dear, ").append(user.getEmail()).append("</h2>");
         htmlMsg.append("<p>You have successfully nominated Candidate ").append(vidhanSabhaNominate.getCandidateName()).append(" for your Constituency ").append(user.getLokSabhaConstituency());
-        htmlMsg.append("<p>Best Wishes, <br/>www.bjmanch.org Admin</p>");
+        htmlMsg.append("<p>Best Wishes, <br/>").append(domainNameAdmin).append("</p>");
         htmlMsg.append("</body></html>");
         MimeBodyPart htmlPart = new MimeBodyPart();
         try {

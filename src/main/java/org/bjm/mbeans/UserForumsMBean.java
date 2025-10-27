@@ -19,7 +19,7 @@ import org.bjm.entities.Forum;
  *
  * @author singh
  */
-@Named(value = "forumsByUserMBean")
+@Named(value = "userForumsMBean")
 public class UserForumsMBean {
     
     private static final Logger LOGGER=Logger.getLogger(UserForumsMBean.class.getName());

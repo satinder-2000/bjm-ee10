@@ -72,6 +72,8 @@ public class VidhanSabha implements Serializable {
         this.stateCode = stateCode;
     }
 
+    
+
     public String getConstituency() {
         return constituency;
     }

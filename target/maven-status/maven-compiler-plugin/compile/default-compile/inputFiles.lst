@@ -39,6 +39,7 @@
 /home/singh/nb-ws/bjm-ee10/src/main/java/org/bjm/entities/Access.java
 /home/singh/nb-ws/bjm-ee10/src/main/java/org/bjm/dtos/SurveyFromForumDto.java
 /home/singh/nb-ws/bjm-ee10/src/main/java/org/bjm/mbeans/CreateBlogMBean.java
+/home/singh/nb-ws/bjm-ee10/src/main/java/org/bjm/mbeans/ForumsByUserMBean.java
 /home/singh/nb-ws/bjm-ee10/src/main/java/org/bjm/ejbs/UserServiceEjb.java
 /home/singh/nb-ws/bjm-ee10/src/main/java/org/bjm/ejbs/BlogServiceEjb.java
 /home/singh/nb-ws/bjm-ee10/src/main/java/org/bjm/servlets/UserRegisterImageServlet.java
@@ -82,6 +83,7 @@
 /home/singh/nb-ws/bjm-ee10/src/main/java/org/bjm/entities/ForumAbuse.java
 /home/singh/nb-ws/bjm-ee10/src/main/java/org/bjm/entities/BlogAbuse.java
 /home/singh/nb-ws/bjm-ee10/src/main/java/org/bjm/entities/User.java
+/home/singh/nb-ws/bjm-ee10/src/main/java/org/bjm/mbeans/SurveyFromForumDetailsMBean.java
 /home/singh/nb-ws/bjm-ee10/src/main/java/org/bjm/entities/LokSabhaNominate.java
 /home/singh/nb-ws/bjm-ee10/src/main/java/org/bjm/ejbs/ReferenceDataServiceEjbLocal.java
 /home/singh/nb-ws/bjm-ee10/src/main/java/org/bjm/entities/SurveyVote.java

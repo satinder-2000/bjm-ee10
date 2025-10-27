@@ -94,32 +94,36 @@ public class SurveyFromForumDetailsMBean implements Serializable{
     
     private void loadOtherSurveyFromForumVotes(){
         otherSurveyFromForumVotes=surveyFromForumServiceEjbLocal.getAllVotesOnSurveyFromForum(surveyFromForum.getId());
-        Map<Integer, ImageVO> surveyVoteerImageMap=new HashMap<>();
-        int agreeCt =0 ;
-        int disagreeCt =0;
-        int undecidedCt =0;
-        for(SurveyFromForumVote sv: otherSurveyFromForumVotes){
-            Access surveyVoterAccess= userServiceEjbLocal.getAccessById(sv.getVoterAccessId());
-            String imageType=surveyVoterAccess.getProfileFile().substring(surveyVoterAccess.getProfileFile().indexOf('.')+1);
-            ImageVO surveyVoterImageVO=new ImageVO(imageType, surveyVoterAccess.getImage());
-            surveyVoteerImageMap.put(surveyVoterAccess.getId(), surveyVoterImageVO);
-            if (sv.getVoteType().equals(VoteType.AGREE.toString())){
+        if(otherSurveyFromForumVotes.isEmpty()){
+            FacesContext.getCurrentInstance().addMessage("otherSurveyVotes", new FacesMessage(FacesMessage.SEVERITY_INFO, "No Survey Vote found!!", "No Survey Vote found!!"));
+        }else{
+            Map<Integer, ImageVO> surveyVoteerImageMap = new HashMap<>();
+            int agreeCt = 0;
+            int disagreeCt = 0;
+            int undecidedCt = 0;
+            for (SurveyFromForumVote sv : otherSurveyFromForumVotes) {
+                Access surveyVoterAccess = userServiceEjbLocal.getAccessById(sv.getVoterAccessId());
+                String imageType = surveyVoterAccess.getProfileFile().substring(surveyVoterAccess.getProfileFile().indexOf('.') + 1);
+                ImageVO surveyVoterImageVO = new ImageVO(imageType, surveyVoterAccess.getImage());
+                surveyVoteerImageMap.put(surveyVoterAccess.getId(), surveyVoterImageVO);
+                if (sv.getVoteType().equals(VoteType.AGREE.toString())) {
                     agreeCt++;
-                }else if (sv.getVoteType().equals(VoteType.DISAGREE.toString())){
+                } else if (sv.getVoteType().equals(VoteType.DISAGREE.toString())) {
                     disagreeCt++;
-                }else if (sv.getVoteType().equals(VoteType.UNDECIDED.toString())){
+                } else if (sv.getVoteType().equals(VoteType.UNDECIDED.toString())) {
                     undecidedCt++;
                 }
+            }
+            int totalVotes = agreeCt + disagreeCt + undecidedCt;
+            agreePct = (agreeCt / totalVotes) * 100;
+            disagreePct = (disagreeCt / totalVotes) * 100;
+            undecidedPct = (undecidedCt / totalVotes) * 100;
+            HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+            HttpSession session = request.getSession();
+            session.setAttribute(BjmConstants.SURVEY_FROM_FORUM_VOTER_IMAGE_MAP, surveyVoteerImageMap);
+            LOGGER.info(String.format("Count of other SurveyFromForum Comments for Survey ID: %d is : %d", surveyFromForum.getId(), otherSurveyFromForumVotes.size()));
+            votesTillDate = otherSurveyFromForumVotes.size();
         }
-        int totalVotes=agreeCt+disagreeCt+undecidedCt;
-        agreePct=(agreeCt/totalVotes)*100;
-        disagreePct=(disagreeCt/totalVotes)*100;
-        undecidedPct=(undecidedCt/totalVotes)*100;
-        HttpServletRequest request=(HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        HttpSession session=request.getSession();
-        session.setAttribute(BjmConstants.SURVEY_FROM_FORUM_VOTER_IMAGE_MAP, surveyVoteerImageMap);
-        LOGGER.info(String.format("Count of other SurveyFromForum Comments for Survey ID: %d is : %d", surveyFromForum.getId(), otherSurveyFromForumVotes.size()));
-        votesTillDate=otherSurveyFromForumVotes.size();
         
         
         

@@ -103,6 +103,8 @@ public class UserDto {
         this.stateCode = stateCode;
     }
 
+        
+
     public String getStateName() {
         return stateName;
     }

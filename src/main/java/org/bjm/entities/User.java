@@ -77,6 +77,10 @@ public class User implements Serializable {
     @Size(max = 15)
     @Column(name = "phone")
     private String phone;
+    @NotNull
+    @Size(min = 2, max = 2)
+    @Column(name = "stateCode")
+    private String stateCode;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
@@ -106,7 +110,7 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User(int id, String email, String firstName, String lastName, String gender, char[] dob, String mobile, String stateName, String lokSabhaConstituency, Timestamp createdOn, Timestamp updatedOn,
+    public User(int id, String email, String firstName, String lastName, String gender, char[] dob, String mobile,String stateCode, String stateName, String lokSabhaConstituency, Timestamp createdOn, Timestamp updatedOn,
             String vidhanSabhaConstituency) {
         this.id = id;
         this.email = email;
@@ -115,6 +119,7 @@ public class User implements Serializable {
         this.gender = gender;
         this.dob = dob;
         this.mobile = mobile;
+        this.stateCode=stateCode;
         this.stateName = stateName;
         this.lokSabhaConstituency = lokSabhaConstituency;
         this.createdOn = createdOn;
@@ -186,6 +191,14 @@ public class User implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getStateCode() {
+        return stateCode;
+    }
+
+    public void setStateCode(String stateCode) {
+        this.stateCode = stateCode;
     }
 
     public String getStateName() {

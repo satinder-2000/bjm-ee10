@@ -83,7 +83,7 @@ public class UserRegisterMBean implements Serializable{
         }
         LOGGER.info(String.format("UserDto initialided with LokSabha count %d for StateCode : %s", userDto.getLokSabhas().size(),userDto.getStateCode()));
         
-        List<VidhanSabha> stateVidhanSabhas=referenceDataServiceEjbLocal.getVidhanSabhasForState(userDto.getStateCode());
+        List<VidhanSabha> stateVidhanSabhas=referenceDataServiceEjbLocal.getVidhanSabhasForState(userDto.getStateCode().toString());
         userDto.setVidhanSabhas(new ArrayList());
         for(VidhanSabha vs: stateVidhanSabhas){
             userDto.getVidhanSabhas().add(vs);

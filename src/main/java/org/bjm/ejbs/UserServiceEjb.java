@@ -56,6 +56,7 @@ public class UserServiceEjb implements UserServiceEjbLocal {
         user.setDob(userDto.getDob().toCharArray());
         user.setMobile(userDto.getMobile());
         user.setPhone(userDto.getPhone());
+        user.setStateCode(userDto.getStateCode());
         user.setStateName(userDto.getStateName());
         user.setLokSabhaConstituency(userDto.getLokSabha());
         user.setVidhanSabhaConstituency(userDto.getVidhanSabha());

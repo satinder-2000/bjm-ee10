@@ -72,6 +72,8 @@ public class LokSabha implements Serializable {
         this.stateCode = stateCode;
     }
 
+    
+
     public String getConstituency() {
         return constituency;
     }

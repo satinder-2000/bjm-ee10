@@ -46,5 +46,12 @@ public class ForumServiceEjb implements ForumServiceEjbLocal {
         return toReturn;
     }
 
+    @Override
+    public List<Forum> getAllUserForums(String email) {
+        Query query =em.createNamedQuery("Forum.findByForumCreatorEmail", Forum.class);
+        query.setParameter("forumCreatorEmail", email);
+        return query.getResultList();
+    }
+
     
 }

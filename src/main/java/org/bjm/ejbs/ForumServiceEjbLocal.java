@@ -13,6 +13,7 @@ import org.bjm.entities.ForumComment;
 public interface ForumServiceEjbLocal {
     
     public Forum findById(int forumId);
+    public List<Forum> getAllUserForums(String email);
     public ForumComment postForumComment(ForumComment forumComment);
     public List<ForumComment> getAllCommentsOnForum(int forumId);
     
