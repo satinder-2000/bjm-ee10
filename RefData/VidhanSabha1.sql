@@ -1,4 +1,4 @@
-insert into VidhanSabha (stateCode,constituency) values 
+insert into VidhanSabha (stateCode,constituency) values
 ('AP','Ichchapuram'),
 ('AP','Palasa'),
 ('AP','Tekkali'),
