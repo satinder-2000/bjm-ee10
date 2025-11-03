@@ -51,7 +51,9 @@
                                         <h:outputLabel for="createdOn" value="Created On" styleClass="w3-margin-left w3-margin-bottom"/>
                                     </div>
                                     <div class="w3-half">
-                                        <h:outputText id="createdOn" value="#{blogDetailsMBean.blogPublishedOn}" styleClass="w3-input" pt:passthrough="5-125 chars"/> 
+                                        <h:outputText id="createdOn" value="#{blogDetailsMBean.blog.publishedOn}" styleClass="w3-input" >
+                                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+                                        </h:outputText>    
                                     </div>
                                 </div>
                                 <br/>

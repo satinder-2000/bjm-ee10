@@ -114,10 +114,11 @@ public class CreateBlogMBean implements Serializable {
     
     }*/
     
-    private void submitBlog(){
+    private String submitBlog(){
         Blog blog=new Blog();
         blog.setTitle(blogDto.getTitle());
         blog.setText(blogDto.getText());
+        blog.setSummary(blogDto.getSummary());
         HttpServletRequest httpServletRequest=(HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         HttpSession session=httpServletRequest.getSession();
         Access access= (Access)session.getAttribute("access");
@@ -125,7 +126,6 @@ public class CreateBlogMBean implements Serializable {
         blog.setPublishedByAccessId(access.getId());
         ServletContext servletContext=(ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
         blog.setPublishedOn(Timestamp.valueOf(LocalDateTime.now(ZoneId.of(servletContext.getInitParameter("zoneId")))));
-        blog.setSummary(blogDto.getSummary());
         blog = userServiceEjbLocal.createUserBlog(blog);
         LOGGER.info(String.format("Blog created with ID: %d",blog.getId()));
         //Activity now
@@ -138,6 +138,9 @@ public class CreateBlogMBean implements Serializable {
         activityMBean.addActivity(activity);
         //Last Step - send Email
         emailServiceEjbLocal.sendBlogCreatedEmail(access, blog);
+        FacesContext.getCurrentInstance().addMessage("email", 
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email already registered.","Email already registered."));
+        return null;
     }
     
     public String getReturnValue(){

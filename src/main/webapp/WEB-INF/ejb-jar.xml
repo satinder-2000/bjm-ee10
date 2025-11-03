@@ -84,6 +84,17 @@
                 <env-entry-value>passwordReset.xhtml</env-entry-value>
             </env-entry>
         </session>
+        <session>
+             <display-name>ActivityServiceEjb</display-name>
+            <ejb-name>ActivityServiceEjb</ejb-name>
+            <ejb-class>org.bjm.ejbs.ActivityServiceEjb</ejb-class>
+            <env-entry>
+                <env-entry-name>recordSize</env-entry-name>
+                <env-entry-type>java.lang.Integer</env-entry-type>
+                <env-entry-value>15</env-entry-value>
+            </env-entry>
+            
+        </session>
     </enterprise-beans>
 
 

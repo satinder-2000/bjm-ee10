@@ -56,7 +56,6 @@ public class Blog implements Serializable {
     private String summary;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10000)
     @Column(name = "text")
     private String text;
     @Basic(optional = false)
@@ -65,7 +64,6 @@ public class Blog implements Serializable {
     private int publishedByAccessId;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 100)
     @Column(name = "publishedByEmail")
     private String publishedByEmail;
 

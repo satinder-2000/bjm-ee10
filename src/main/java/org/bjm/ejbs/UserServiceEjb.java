@@ -96,7 +96,7 @@ public class UserServiceEjb implements UserServiceEjbLocal {
     public Access getAccessByEmail(String email) {
         Query query=em.createNamedQuery("Access.findByEmail", Access.class);
         query.setParameter("email", email);
-        access= (Access)query.getResultList().get(0);
+        access= (Access)query.getSingleResult();
         return access;
     }
 

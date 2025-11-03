@@ -29,7 +29,7 @@ import java.sql.Timestamp;
     @NamedQuery(name = "Activity.findByDescription", query = "SELECT a FROM Activity a WHERE a.description = :description"),
     @NamedQuery(name = "Activity.findByOwnerEmail", query = "SELECT a FROM Activity a WHERE a.ownerEmail = :ownerEmail"),
     @NamedQuery(name = "Activity.findByActivityId", query = "SELECT a FROM Activity a WHERE a.activityId = :activityId"),
-    @NamedQuery(name = "Activity.findLastN", query = "SELECT a FROM Activity a ORDER BY a.id")
+    @NamedQuery(name = "Activity.findLastN", query = "SELECT a FROM Activity a")
 })
 public class Activity implements Serializable {
 
