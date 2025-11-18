@@ -3,6 +3,7 @@ package org.bjm.ejbs;
 import jakarta.ejb.Stateful;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import java.sql.Timestamp;
@@ -96,8 +97,14 @@ public class UserServiceEjb implements UserServiceEjbLocal {
     public Access getAccessByEmail(String email) {
         Query query=em.createNamedQuery("Access.findByEmail", Access.class);
         query.setParameter("email", email);
-        access= (Access)query.getSingleResult();
-        return access;
+        try{
+            access= (Access)query.getSingleResult();
+            return access;
+        }catch(NoResultException nre){
+            LOGGER.severe(nre.getMessage());
+            return null;
+        }
+        
     }
 
     @Override

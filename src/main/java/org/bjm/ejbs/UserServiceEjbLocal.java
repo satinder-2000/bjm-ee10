@@ -1,6 +1,7 @@
 package org.bjm.ejbs;
 
 import jakarta.ejb.Local;
+import jakarta.persistence.NoResultException;
 import java.util.List;
 import org.bjm.dtos.UserDto;
 import org.bjm.entities.Access;
