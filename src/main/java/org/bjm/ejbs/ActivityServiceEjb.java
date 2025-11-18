@@ -24,13 +24,10 @@ public class ActivityServiceEjb implements ActivityServiceEjbLocal {
     @PersistenceContext(name = "bjmPU")
     private EntityManager em;
     
-    @Resource(name = "recordSize")
-    private Integer recordSize;
-    
     @Override
     public List<Activity> getRecentActivities(int size) {
         Query query=em.createNamedQuery("Activity.findLastN", Activity.class);
-        query.setMaxResults(recordSize);
+        query.setMaxResults(size);
         List<Activity> toReturn=query.getResultList();
         return toReturn;
     }
