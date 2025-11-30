@@ -1,0 +1,7 @@
+Google: 
+ID: 456711970067
+456711970067-vi8ojpjgk5g69ntg4da2tcqohsn01nk1.apps.googleusercontent.com
+
+Facebook:
+ID 1103781728329606
+App secret  c0a631c0faa378fd2660bcd6c51cceaf
